@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Serie 2:7 · Sesión 1 — Creciendo firmes en la familia de Dios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F2E9;
+    --paper-2:#FBF8F1;
+    --ink:#22282A;
+    --ink-soft:#5A625F;
+    --ink-faint:#8C938E;
+    --teal:#1E5B57;
+    --teal-bright:#2E837B;
+    --teal-wash:#E7EEEB;
+    --line:rgba(30,91,87,.20);
+    --line-soft:rgba(34,40,42,.12);
+    --gold:#B0894E;
+    --serif:'Spectral',Georgia,'Times New Roman',serif;
+    --sans:'Libre Franklin',system-ui,-apple-system,sans-serif;
+    --W:1280px;
+    --H:720px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+
+  html,body{height:100%}
+  body{
+    background:#1a1f1d;
+    font-family:var(--sans);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow:hidden;
+  }
+
+  /* ---------- App / viewport ---------- */
+  .viewport{
+    position:fixed;inset:0;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .stage{
+    width:var(--W);height:var(--H);
+    position:relative;
+    transform-origin:center center;
+    box-shadow:0 30px 80px rgba(0,0,0,.45);
+  }
+
+  /* ---------- Slide base ---------- */
+  .slide{
+    position:absolute;inset:0;
+    width:var(--W);height:var(--H);
+    background:var(--paper);
+    background-image:
+      radial-gradient(120% 90% at 88% 8%, rgba(46,131,123,.06), transparent 60%),
+      radial-gradient(100% 80% at 6% 100%, rgba(176,137,78,.05), transparent 55%);
+    padding:74px 92px 64px;
+    display:flex;flex-direction:column;
+    opacity:0;visibility:hidden;
+    transition:opacity .5s ease;
+    overflow:hidden;
+  }
+  .slide.is-active{opacity:1;visibility:visible;z-index:2}
+
+  /* subtle paper grain */
+  .slide::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    opacity:.5;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- Running header / footer ---------- */
+  .mark{
+    font-family:var(--serif);
+    font-weight:600;
+    letter-spacing:.01em;
+    color:var(--teal);
+  }
+  .topbar{
+    position:absolute;top:40px;left:92px;right:92px;
+    display:flex;align-items:center;justify-content:space-between;
+    z-index:3;
+  }
+  .topbar .series{
+    font-size:12px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+  .topbar .mark{font-size:22px}
+  .footer{
+    position:absolute;bottom:34px;left:92px;right:92px;
+    display:flex;align-items:center;justify-content:space-between;
+    font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);
+    z-index:3;
+  }
+  .footer .dot{width:4px;height:4px;border-radius:50%;background:var(--teal);display:inline-block;margin:0 9px;vertical-align:middle}
+
+  /* ---------- Headings ---------- */
+  .eyebrow{
+    font-size:13px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--teal-bright);
+    display:flex;align-items:center;gap:14px;margin-bottom:18px;
+  }
+  .eyebrow::before{content:"";width:34px;height:2px;background:var(--teal);display:inline-block}
+
+  h1.title{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:52px;line-height:1.06;letter-spacing:-.01em;
+    color:var(--ink);
+    max-width:18ch;
+  }
+  .lead{
+    font-size:19px;line-height:1.5;color:var(--ink-soft);margin-top:18px;max-width:62ch;font-weight:400;
+  }
+
+  .body{flex:1;display:flex;flex-direction:column;justify-content:center}
+  .body.top{justify-content:flex-start;padding-top:8px}
+
+  /* ---------- Numbered / icon lists ---------- */
+  .list{display:flex;flex-direction:column;gap:18px;margin-top:30px}
+  .item{display:flex;gap:20px;align-items:flex-start}
+  .num{
+    flex:none;width:38px;height:38px;border-radius:50%;
+    border:1.5px solid var(--teal);color:var(--teal);
+    font-family:var(--serif);font-weight:600;font-size:18px;
+    display:flex;align-items:center;justify-content:center;
+    margin-top:1px;
+  }
+  .item .it-h{font-size:21px;font-weight:600;color:var(--ink);line-height:1.25}
+  .item .it-s{font-size:16.5px;color:var(--ink-soft);line-height:1.45;margin-top:3px;max-width:74ch}
+
+  /* compact two-up bullet grids */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px 56px;margin-top:30px}
+  .bullets{list-style:none;display:flex;flex-direction:column;gap:14px}
+  .bullets li{position:relative;padding-left:26px;font-size:18px;line-height:1.4;color:var(--ink)}
+  .bullets li span{color:var(--ink-soft);font-size:16px}
+  .bullets li::before{
+    content:"";position:absolute;left:0;top:9px;width:9px;height:9px;
+    background:var(--teal);transform:rotate(45deg);
+  }
+
+  .colcard{background:var(--paper-2);border:1px solid var(--line-soft);border-radius:14px;padding:30px 32px}
+  .colcard h3{font-family:var(--serif);font-weight:600;font-size:23px;color:var(--teal);margin-bottom:18px}
+
+  /* ---------- Cover ---------- */
+  .cover{justify-content:center;align-items:flex-start;padding:0 96px}
+  .cover .kicker{font-size:14px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--teal-bright)}
+  .cover .glyph{
+    font-family:var(--serif);font-weight:600;
+    font-size:150px;line-height:.9;color:var(--teal);
+    letter-spacing:-.02em;margin:8px 0 6px -6px;
+    position:relative;
+  }
+  .cover .glyph::after{content:"";display:block;width:120px;height:4px;background:var(--gold);margin-top:26px}
+  .cover h1{
+    font-family:var(--serif);font-weight:500;font-size:60px;line-height:1.04;
+    color:var(--ink);max-width:17ch;margin-top:30px;letter-spacing:-.015em;
+  }
+  .cover .sess{display:flex;align-items:baseline;gap:16px;margin-top:30px}
+  .cover .sess b{font-family:var(--serif);font-weight:600;font-size:30px;color:var(--ink)}
+  .cover .sess span{font-size:15px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint)}
+  .cover .ref{position:absolute;bottom:64px;left:96px;font-style:italic;font-family:var(--serif);font-size:17px;color:var(--ink-soft)}
+  .cover .deco{position:absolute;top:0;right:0;width:300px;height:100%;
+    background:linear-gradient(180deg,rgba(46,131,123,.10),rgba(30,91,87,.04));
+    border-left:1px solid var(--line);}
+  .cover .deco::before{content:"2:7";position:absolute;bottom:48px;right:40px;font-family:var(--serif);font-size:90px;color:rgba(30,91,87,.10);font-weight:600}
+
+  /* ---------- Scripture slide ---------- */
+  .scripture{align-items:center;justify-content:center;text-align:center;padding:80px 140px}
+  .scripture .quote{
+    font-family:var(--serif);font-weight:400;font-style:italic;
+    font-size:42px;line-height:1.38;color:var(--ink);letter-spacing:-.005em;
+    max-width:24ch;
+  }
+  .scripture .quote .em{color:var(--teal);font-style:italic;font-weight:500}
+  .scripture .attr{margin-top:38px;font-size:15px;letter-spacing:.28em;text-transform:uppercase;color:var(--teal-bright);font-weight:600}
+  .scripture .bigmark{position:absolute;top:60px;left:50%;transform:translateX(-50%);font-family:var(--serif);font-size:46px;color:var(--line);font-weight:600}
+
+  /* ---------- Marks (cómo marcar) ---------- */
+  .marks{display:grid;grid-template-columns:1fr 1fr;gap:16px 48px;margin-top:26px}
+  .mk{display:flex;align-items:center;gap:20px}
+  .mk .sym{
+    flex:none;width:62px;height:48px;border-radius:10px;background:var(--teal-wash);
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-size:26px;color:var(--teal);font-weight:600;
+  }
+  .mk .sym u{text-decoration-thickness:2px;text-underline-offset:3px}
+  .mk .mk-t b{display:block;font-size:18px;font-weight:600;color:var(--ink);line-height:1.2}
+  .mk .mk-t span{font-size:14.5px;color:var(--ink-soft)}
+
+  /* ---------- Verse table ---------- */
+  .vtable{margin-top:28px;border-top:1px solid var(--line)}
+  .vrow{display:flex;align-items:center;justify-content:space-between;
+    padding:16px 6px;border-bottom:1px solid var(--line-soft)}
+  .vrow .g{display:flex;align-items:center;gap:18px}
+  .vrow .gn{font-family:var(--serif);font-size:17px;color:var(--teal-bright);font-weight:600;width:24px}
+  .vrow .gt{font-size:20px;color:var(--ink);font-weight:500}
+  .vrow .ref{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--teal);letter-spacing:.01em}
+
+  .callout{
+    margin-top:26px;background:var(--teal);color:#F4F1E8;border-radius:12px;
+    padding:18px 26px;font-size:17px;line-height:1.4;display:flex;align-items:center;gap:14px;
+  }
+  .callout b{color:#fff}
+  .callout .tag{flex:none;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    background:rgba(255,255,255,.16);padding:5px 10px;border-radius:20px;font-weight:600}
+
+  .note{margin-top:24px;font-size:15.5px;color:var(--ink-soft);font-style:italic;font-family:var(--serif);
+    padding-left:18px;border-left:2px solid var(--teal)}
+
+  /* steps inline */
+  .steps{display:flex;gap:18px;margin-top:30px}
+  .step{flex:1;background:var(--paper-2);border:1px solid var(--line-soft);border-radius:14px;padding:24px}
+  .step .sn{font-family:var(--serif);font-size:30px;color:var(--teal);font-weight:600;line-height:1}
+  .step b{display:block;margin-top:12px;font-size:18px;color:var(--ink)}
+  .step span{display:block;margin-top:6px;font-size:14.5px;color:var(--ink-soft);line-height:1.4}
+
+  /* closing */
+  .closing{align-items:center;justify-content:center;text-align:center}
+  .closing .glyph{font-family:var(--serif);font-size:70px;color:var(--teal);font-weight:600;line-height:1}
+  .closing h1{font-family:var(--serif);font-weight:500;font-size:46px;color:var(--ink);margin-top:18px}
+  .closing p{margin-top:18px;font-size:17px;color:var(--ink-soft);font-style:italic;font-family:var(--serif)}
+  .closing .rule{width:90px;height:3px;background:var(--gold);margin:30px auto 0}
+
+  /* ---------- entrance animation ---------- */
+  .slide.is-active .anim{animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
+  .slide.is-active .anim:nth-child(1){animation-delay:.05s}
+  .slide.is-active .anim:nth-child(2){animation-delay:.13s}
+  .slide.is-active .anim:nth-child(3){animation-delay:.21s}
+  .slide.is-active .anim:nth-child(4){animation-delay:.29s}
+  .slide.is-active .anim:nth-child(5){animation-delay:.37s}
+  .slide.is-active .anim:nth-child(6){animation-delay:.45s}
+  .slide.is-active .anim:nth-child(7){animation-delay:.53s}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+  /* ---------- Controls ---------- */
+  .controls{
+    position:fixed;bottom:22px;left:50%;transform:translateX(-50%);
+    display:flex;align-items:center;gap:14px;z-index:50;
+    background:rgba(20,26,24,.72);backdrop-filter:blur(8px);
+    padding:8px 10px;border-radius:40px;border:1px solid rgba(255,255,255,.08);
+    opacity:.25;transition:opacity .3s;
+  }
+  .controls:hover{opacity:1}
+  .controls button{
+    width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;
+    background:rgba(255,255,255,.10);color:#F4F1E8;font-size:17px;
+    display:flex;align-items:center;justify-content:center;transition:background .2s;
+  }
+  .controls button:hover{background:var(--teal-bright)}
+  .controls .count{color:#E7E2D6;font-size:13px;letter-spacing:.12em;min-width:54px;text-align:center;font-variant-numeric:tabular-nums}
+  .progress{position:fixed;top:0;left:0;height:3px;background:var(--teal-bright);z-index:60;transition:width .4s ease}
+  .hint{position:fixed;bottom:26px;right:24px;color:rgba(255,255,255,.32);font-size:11px;letter-spacing:.1em;z-index:50}
+
+  /* ---------- PRINT / PDF ---------- */
+  @media print{
+    @page{size:13.333in 7.5in;margin:0}
+    html,body{height:auto;overflow:visible;background:#fff}
+    .viewport{position:static;display:block}
+    .stage{width:auto;height:auto;transform:none!important;box-shadow:none}
+    .slide{
+      position:relative;inset:auto;
+      opacity:1!important;visibility:visible!important;
+      page-break-after:always;break-after:page;
+      box-shadow:none;
+    }
+    .slide:last-child{page-break-after:auto}
+    .slide .anim{animation:none!important}
+    .controls,.hint,.progress{display:none!important}
+    .slide::after{opacity:.45}
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<div class="viewport">
+  <div class="stage" id="stage">
+
+    <!-- 1 · PORTADA -->
+    <section class="slide cover is-active">
+      <div class="deco"></div>
+      <div class="kicker anim">La Serie 2:7</div>
+      <div class="glyph anim">2:7</div>
+      <h1 class="anim">Creciendo firmes en la familia de Dios</h1>
+      <div class="sess anim"><b>Sesión 1</b><span>Discipulado · Grupo virtual</span></div>
+      <div class="ref">«Arraigados y sobreedificados en él.» — Colosenses 2:7</div>
+    </section>
+
+    <!-- 2 · BIENVENIDA -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 1</span><span class="mark">2:7</span></div>
+      <div class="body">
+        <div class="eyebrow anim">Para comenzar</div>
+        <h1 class="title anim">Bienvenidos</h1>
+        <p class="lead anim">Empecemos juntos este camino de crecer firmes en la familia de Dios.</p>
+        <div class="list anim">
+          <div class="item"><div class="num">1</div><div><div class="it-h">Iniciemos con oración</div><div class="it-s">Le pedimos a Dios que dirija nuestro tiempo y nuestro corazón.</div></div></div>
+          <div class="item"><div class="num">2</div><div><div class="it-h">Conozcámonos</div><div class="it-s">Esta serie es una experiencia relacional: con el grupo y con Dios. Presentémonos.</div></div></div>
+        </div>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Bienvenida</span></div>
+    </section>
+
+    <!-- 3 · LO QUE VEREMOS HOY -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 1</span><span class="mark">2:7</span></div>
+      <div class="body top">
+        <div class="eyebrow anim">Bosquejo</div>
+        <h1 class="title anim">Lo que veremos hoy</h1>
+        <div class="grid anim" style="margin-top:34px">
+          <ul class="bullets">
+            <li>El propósito de la serie <span>— Colosenses 2:7</span></li>
+            <li>Cómo funciona nuestro grupo</li>
+            <li>Leer y marcar la Biblia</li>
+          </ul>
+          <ul class="bullets">
+            <li>Memorización de las Escrituras</li>
+            <li>Vistazo a «Comenzando con Cristo»</li>
+            <li>Tarea para la sesión 2</li>
+          </ul>
+        </div>
+        <p class="note anim">Hoy vemos lo general de cada sección; lo profundizamos a lo largo de la serie.</p>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Bosquejo</span></div>
+    </section>
+
+    <!-- 4 · COLOSENSES 2:7 -->
+    <section class="slide scripture">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 1</span><span class="mark">2:7</span></div>
+      <div class="bigmark">2:7</div>
+      <p class="quote anim">«Arráiguense profundamente en él y edifiquen toda la vida sobre él. Entonces la fe de ustedes se <span class="em">fortalecerá</span> en la verdad que se les enseñó, y rebosarán de <span class="em">gratitud</span>.»</p>
+      <div class="attr anim">Colosenses 2:7</div>
+    </section>
+
+    <!-- 5 · PROPÓSITO DE LA SERIE -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 1</span><span class="mark">2:7</span></div>
+      <div class="body">
+        <div class="eyebrow anim">Con base en Colosenses 2:7</div>
+        <h1 class="title anim">El propósito de la serie</h1>
+        <div class="list anim">
+          <div class="item"><div class="num">1</div><div><div class="it-h">Arraigarse en Cristo y fortalecer la fe</div><div class="it-s">Ser constantes en las disciplinas espirituales, no solo acumular conocimiento bíblico.</div></div></div>
+          <div class="item"><div class="num">2</div><div><div class="it-h">Rebosar de gratitud cada día</div><div class="it-s">Aprender a disfrutar un caminar diario estable y constante con Cristo.</div></div></div>
+          <div class="item"><div class="num">3</div><div><div class="it-h">Aprender haciendo</div><div class="it-s">La transformación llega por la constancia en las Escrituras y la obediencia, no por conferencias.</div></div></div>
+        </div>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Propósito</span></div>
+    </section>
+
+    <!-- 6 · CÓMO FUNCIONA -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 1</span><span class="mark">2:7</span></div>
+      <div class="body top">
+        <div class="eyebrow anim">Comentarios generales</div>
+        <h1 class="title anim">Cómo funciona nuestro grupo</h1>
+        <div class="grid anim" style="margin-top:30px">
+          <ul class="bullets">
+            <li>3 cursos · 11 sesiones cada uno <span>— de 1 a 2 horas</span></li>
+            <li>Grupo de 4 a 12 personas</li>
+            <li>No es un curso de conferencias: <span>participamos todos</span></li>
+          </ul>
+          <ul class="bullets">
+            <li>Cada sesión pide ~1 hora de preparación</li>
+            <li>Asistencia: no faltar a más de 2 sesiones</li>
+            <li>Una experiencia relacional con el grupo y con Dios</li>
+          </ul>
+        </div>
+        <p class="note anim">El grupo se cierra después de la sesión 2 para que nadie tenga que apresurarse con el material.</p>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>El grupo</span></div>
+    </section>
+
+    <!-- 7 · LEER Y MARCAR — POR QUÉ -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 1</span><span class="mark">2:7</span></div>
+      <div class="body">
+        <div class="eyebrow anim">Leer y marcar la Biblia</div>
+        <h1 class="title anim">¿Por qué marcar lo que leemos?</h1>
+        <div class="list anim">
+          <div class="item"><div class="num">·</div><div><div class="it-h">Es una de las disciplinas más valiosas</div><div class="it-s">La lectura regular de las Escrituras alimenta la vida del cristiano.</div></div></div>
+          <div class="item"><div class="num">·</div><div><div class="it-h">Marcar nos ayuda a retener</div><div class="it-s">Señalamos lo que nos llama la atención o toca el corazón, y aprovechamos más la lectura.</div></div></div>
+          <div class="item"><div class="num">·</div><div><div class="it-h">Compartirlo nos anima</div><div class="it-s">Contar lo que marcamos genera estímulo y desafío mutuo en el grupo.</div></div></div>
+        </div>
+        <p class="note anim">Usa una traducción o paráfrasis contemporánea y económica que puedas marcar con libertad.</p>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Leer y marcar</span></div>
+    </section>
+
+    <!-- 8 · CÓMO MARCAR -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 1</span><span class="mark">2:7</span></div>
+      <div class="body top">
+        <div class="eyebrow anim">Formas de marcar</div>
+        <h1 class="title anim">Cómo marcar tu Biblia</h1>
+        <div class="marks anim">
+          <div class="mk"><div class="sym">[&nbsp;]</div><div class="mk-t"><b>Corchetes</b><span>Encierran una frase u oración</span></div></div>
+          <div class="mk"><div class="sym">⟋</div><div class="mk-t"><b>Diagonal de introducción</b><span>Señala la frase que le sigue</span></div></div>
+          <div class="mk"><div class="sym">⫽</div><div class="mk-t"><b>Diagonales al margen</b><span>Para pasajes más largos</span></div></div>
+          <div class="mk"><div class="sym">◯</div><div class="mk-t"><b>Círculo</b><span>Palabras repetidas o personajes clave</span></div></div>
+          <div class="mk"><div class="sym">│</div><div class="mk-t"><b>Línea vertical al margen</b><span>Marca las oraciones que están al lado</span></div></div>
+          <div class="mk"><div class="sym"><u>Aa</u></div><div class="mk-t"><b>Subrayado</b><span>Palabras, frases o una oración</span></div></div>
+        </div>
+        <p class="note anim">Lo importante es marcar las partes del pasaje que te impresionan, en tu mente o tu corazón.</p>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Cómo marcar</span></div>
+    </section>
+
+    <!-- 9 · QUÉ Y DÓNDE LEER -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 1</span><span class="mark">2:7</span></div>
+      <div class="body">
+        <div class="eyebrow anim">Qué y dónde leer</div>
+        <h1 class="title anim" style="font-size:46px">Empieza por donde puedas disfrutar</h1>
+        <div class="grid anim" style="margin-top:28px">
+          <div class="colcard">
+            <h3>Qué marcar</h3>
+            <ul class="bullets">
+              <li>Lo que te gusta: ánimo, perspectivas, desafíos</li>
+              <li>Lee por placer, no buscando teología</li>
+              <li>Al terminar el capítulo, revisa lo marcado</li>
+            </ul>
+          </div>
+          <div class="colcard">
+            <h3>Dónde empezar</h3>
+            <ul class="bullets">
+              <li>¿Nuevo? Comienza en el N.T. (Juan, Filipenses)</li>
+              <li>Termina un libro antes de comenzar otro</li>
+              <li>Deja Levítico y Apocalipsis para después</li>
+              <li>A.T.: Josué, 1–2 Samuel, 1–2 Reyes, Génesis, Daniel</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Qué y dónde leer</span></div>
+    </section>
+
+    <!-- 10 · EJERCICIO ROMANOS 12 -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 1</span><span class="mark">2:7</span></div>
+      <div class="body">
+        <div class="eyebrow anim">Ejercicio en grupo</div>
+        <h1 class="title anim">Leer y marcar: Romanos 12</h1>
+        <p class="lead anim">Lo hacemos juntos ahora mismo.</p>
+        <div class="steps anim">
+          <div class="step"><div class="sn">1</div><b>Ora</b><span>Pide a Dios que te hable desde su Palabra.</span></div>
+          <div class="step"><div class="sn">2</div><b>Reflexiona</b><span>Lee con calma y medita el pasaje.</span></div>
+          <div class="step"><div class="sn">3</div><b>Marca</b><span>Señala los pensamientos que sobresalen.</span></div>
+        </div>
+        <p class="note anim">Después compartiremos una o dos cosas que cada quien marcó.</p>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Ejercicio</span></div>
+    </section>
+
+    <!-- 11 · MEMORIZACIÓN: LAS 5 GARANTÍAS -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 1</span><span class="mark">2:7</span></div>
+      <div class="body top">
+        <div class="eyebrow anim">Memorización de las Escrituras</div>
+        <h1 class="title anim" style="font-size:44px">Las cinco «Garantías»</h1>
+        <p class="lead anim" style="margin-top:10px;font-size:17px">Del paquete <em>Comenzando con Cristo</em> · Los Navegantes</p>
+        <div class="vtable anim">
+          <div class="vrow"><div class="g"><span class="gn">1</span><span class="gt">Garantía de la salvación</span></div><span class="ref">1 Juan 5:11-12</span></div>
+          <div class="vrow"><div class="g"><span class="gn">2</span><span class="gt">Garantía de la oración respondida</span></div><span class="ref">Juan 16:24</span></div>
+          <div class="vrow"><div class="g"><span class="gn">3</span><span class="gt">Garantía de la victoria</span></div><span class="ref">1 Corintios 10:13</span></div>
+          <div class="vrow"><div class="g"><span class="gn">4</span><span class="gt">Garantía del perdón</span></div><span class="ref">1 Juan 1:9</span></div>
+          <div class="vrow"><div class="g"><span class="gn">5</span><span class="gt">Garantía de la guía</span></div><span class="ref">Proverbios 3:5-6</span></div>
+        </div>
+        <div class="callout anim"><span class="tag">Para la sesión 2</span><div>Memoriza <b>Garantía de la salvación — 1 Juan 5:11-12</b></div></div>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Memorización</span></div>
+    </section>
+
+    <!-- 12 · CÓMO MEMORIZAR -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 1</span><span class="mark">2:7</span></div>
+      <div class="body top">
+        <div class="eyebrow anim">Maneras comprobadas</div>
+        <h1 class="title anim">Cómo memorizar un versículo</h1>
+        <div class="grid anim" style="margin-top:30px">
+          <ul class="bullets">
+            <li>Léelo en voz alta varias veces</li>
+            <li>Aprende tema + cita + primera frase como una unidad</li>
+            <li>Agrega frase por frase, poco a poco</li>
+          </ul>
+          <ul class="bullets">
+            <li>Hazlo en voz audible</li>
+            <li>Piensa cómo se aplica a tu vida</li>
+            <li>Repasa en secuencia: tema → cita → versículo → cita</li>
+          </ul>
+        </div>
+        <div class="callout anim" style="background:var(--gold)"><span class="tag">Lo más crítico</span><div>El secreto es el <b>repaso, repaso, repaso</b> — hasta que quede grabado.</div></div>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Memorizar</span></div>
+    </section>
+
+    <!-- 13 · TAREA PARA LA SESIÓN 2 -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 1</span><span class="mark">2:7</span></div>
+      <div class="body">
+        <div class="eyebrow anim">Antes de la próxima vez</div>
+        <h1 class="title anim">Tarea para la sesión 2</h1>
+        <div class="list anim">
+          <div class="item"><div class="num">1</div><div><div class="it-h">Memorización</div><div class="it-s">Lee «Explicación de Comenzando con Cristo» y memoriza «Garantía de la salvación» (1 Juan 5:11-12).</div></div></div>
+          <div class="item"><div class="num">2</div><div><div class="it-h">Lectura bíblica</div><div class="it-s">Consigue una traducción o paráfrasis contemporánea y lee + marca cada día.</div></div></div>
+          <div class="item"><div class="num">3</div><div><div class="it-h">Estudio bíblico</div><div class="it-s">Completa el estudio «Comenzando con Cristo».</div></div></div>
+        </div>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Tarea</span></div>
+    </section>
+
+    <!-- 14 · CIERRE -->
+    <section class="slide closing">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 1</span><span class="mark">2:7</span></div>
+      <div class="glyph anim">2:7</div>
+      <h1 class="anim">Terminemos en oración</h1>
+      <p class="anim">«Arraigados y sobreedificados en él… y rebosando de gratitud.»</p>
+      <div class="rule anim"></div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Sesión 1</span></div>
+    </section>
+
+  </div>
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="controls">
+  <button id="prev" aria-label="Anterior">‹</button>
+  <span class="count" id="count">1 / 14</span>
+  <button id="next" aria-label="Siguiente">›</button>
+</div>
+<div class="hint">← →  para navegar</div>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  const stage=document.getElementById('stage');
+  const count=document.getElementById('count');
+  const progress=document.getElementById('progress');
+  let i=slides.findIndex(s=>s.classList.contains('is-active'));
+  if(i<0)i=0;
+
+  function show(n){
+    i=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach((s,k)=>s.classList.toggle('is-active',k===i));
+    count.textContent=(i+1)+' / '+slides.length;
+    progress.style.width=((i+1)/slides.length*100)+'%';
+  }
+  function scale(){
+    const pad=48;
+    const s=Math.min((innerWidth-pad)/1280,(innerHeight-pad)/720);
+    stage.style.transform='scale('+s+')';
+  }
+  document.getElementById('next').onclick=()=>show(i+1);
+  document.getElementById('prev').onclick=()=>show(i-1);
+  addEventListener('keydown',e=>{
+    if(['ArrowRight','PageDown',' '].includes(e.key)){show(i+1);e.preventDefault();}
+    else if(['ArrowLeft','PageUp'].includes(e.key)){show(i-1);e.preventDefault();}
+    else if(e.key==='Home')show(0);
+    else if(e.key==='End')show(slides.length-1);
+  });
+  addEventListener('resize',scale);
+  scale();show(i);
+</script>
+</body>
+</html>
