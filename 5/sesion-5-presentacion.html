@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Serie 2:7 · Sesión 5 — La oración y la Palabra de Dios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F2E9;--paper-2:#FBF8F1;--ink:#22282A;--ink-soft:#5A625F;--ink-faint:#8C938E;
+    --teal:#1E5B57;--teal-bright:#2E837B;--teal-wash:#E7EEEB;
+    --line:rgba(30,91,87,.20);--line-soft:rgba(34,40,42,.12);--gold:#B0894E;
+    --serif:'Spectral',Georgia,'Times New Roman',serif;--sans:'Libre Franklin',system-ui,-apple-system,sans-serif;
+    --W:1280px;--H:720px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{background:#1a1f1d;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow:hidden}
+
+  .viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+  .stage{width:var(--W);height:var(--H);position:relative;transform-origin:center center;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+
+  .slide{
+    position:absolute;inset:0;width:var(--W);height:var(--H);background:var(--paper);
+    background-image:
+      radial-gradient(120% 90% at 88% 8%, rgba(46,131,123,.06), transparent 60%),
+      radial-gradient(100% 80% at 6% 100%, rgba(176,137,78,.05), transparent 55%);
+    padding:74px 92px 64px;display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .5s ease;overflow:hidden;
+  }
+  .slide.is-active{opacity:1;visibility:visible;z-index:2}
+  .slide::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E")}
+
+  .mark{font-family:var(--serif);font-weight:600;letter-spacing:.01em;color:var(--teal)}
+  .topbar{position:absolute;top:40px;left:92px;right:92px;display:flex;align-items:center;justify-content:space-between;z-index:3}
+  .topbar .series{font-size:12px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-faint)}
+  .topbar .mark{font-size:22px}
+  .footer{position:absolute;bottom:34px;left:92px;right:92px;display:flex;align-items:center;justify-content:space-between;
+    font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);z-index:3}
+
+  .eyebrow{font-size:13px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--teal-bright);display:flex;align-items:center;gap:14px;margin-bottom:16px}
+  .eyebrow::before{content:"";width:34px;height:2px;background:var(--teal);display:inline-block}
+  h1.title{font-family:var(--serif);font-weight:500;font-size:52px;line-height:1.06;letter-spacing:-.01em;color:var(--ink);max-width:22ch}
+  .lead{font-size:23px;line-height:1.5;color:var(--ink-soft);margin-top:18px;max-width:56ch;font-weight:400}
+  .body{flex:1;display:flex;flex-direction:column;justify-content:center}
+  .body.top{justify-content:flex-start;padding-top:6px}
+
+  .list{display:flex;flex-direction:column;gap:20px;margin-top:30px}
+  .item{display:flex;gap:22px;align-items:flex-start}
+  .num{flex:none;width:42px;height:42px;border-radius:50%;border:1.5px solid var(--teal);color:var(--teal);font-family:var(--serif);font-weight:600;font-size:20px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .item .it-h{font-size:25px;font-weight:600;color:var(--ink);line-height:1.25}
+  .item .it-s{font-size:20px;color:var(--ink-soft);line-height:1.45;margin-top:4px;max-width:70ch}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px 52px;margin-top:30px}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:30px}
+  .bullets{list-style:none;display:flex;flex-direction:column;gap:15px}
+  .bullets li{position:relative;padding-left:28px;font-size:22px;line-height:1.4;color:var(--ink)}
+  .bullets li span{color:var(--ink-soft);font-size:18px}
+  .bullets li::before{content:"";position:absolute;left:0;top:10px;width:11px;height:11px;background:var(--teal);transform:rotate(45deg)}
+
+  .colcard{background:var(--paper-2);border:1px solid var(--line-soft);border-radius:14px;padding:26px 30px}
+  .colcard h3{font-family:var(--serif);font-weight:600;font-size:25px;color:var(--teal);margin-bottom:14px}
+  .colcard p{font-size:20px;line-height:1.5;color:var(--ink-soft)}
+  .colcard .ref{display:block;margin-top:12px;font-family:var(--serif);font-weight:600;font-size:18px;color:var(--teal)}
+
+  .cover{justify-content:center;align-items:flex-start;padding:0 96px}
+  .cover .kicker{font-size:14px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--teal-bright)}
+  .cover .glyph{font-family:var(--serif);font-weight:600;font-size:150px;line-height:.9;color:var(--teal);letter-spacing:-.02em;margin:8px 0 6px -6px;position:relative}
+  .cover .glyph::after{content:"";display:block;width:120px;height:4px;background:var(--gold);margin-top:26px}
+  .cover h1{font-family:var(--serif);font-weight:500;font-size:56px;line-height:1.04;color:var(--ink);max-width:18ch;margin-top:30px;letter-spacing:-.015em}
+  .cover .sess{display:flex;align-items:baseline;gap:16px;margin-top:30px}
+  .cover .sess b{font-family:var(--serif);font-weight:600;font-size:30px;color:var(--ink)}
+  .cover .sess span{font-size:15px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint)}
+  .cover .ref{position:absolute;bottom:64px;left:96px;font-style:italic;font-family:var(--serif);font-size:17px;color:var(--ink-soft)}
+  .cover .deco{position:absolute;top:0;right:0;width:300px;height:100%;background:linear-gradient(180deg,rgba(46,131,123,.10),rgba(30,91,87,.04));border-left:1px solid var(--line)}
+  .cover .deco::before{content:"2:7";position:absolute;bottom:48px;right:40px;font-family:var(--serif);font-size:90px;color:rgba(30,91,87,.10);font-weight:600}
+
+  .scripture{align-items:center;justify-content:center;text-align:center;padding:70px 130px}
+  .scripture .quote{font-family:var(--serif);font-weight:400;font-style:italic;font-size:38px;line-height:1.42;color:var(--ink);letter-spacing:-.005em;max-width:30ch}
+  .scripture .quote .em{color:var(--teal);font-style:italic;font-weight:500}
+  .scripture .attr{margin-top:32px;font-size:15px;letter-spacing:.28em;text-transform:uppercase;color:var(--teal-bright);font-weight:600}
+  .scripture .bigmark{position:absolute;top:60px;left:50%;transform:translateX(-50%);font-family:var(--serif);font-size:46px;color:var(--line);font-weight:600}
+
+  .vtable{margin-top:24px;border-top:1px solid var(--line)}
+  .vrow{display:flex;align-items:center;justify-content:space-between;padding:16px 6px;border-bottom:1px solid var(--line-soft)}
+  .vrow .g{display:flex;align-items:center;gap:18px}
+  .vrow{display:flex;align-items:center;justify-content:space-between;padding:18px 6px;border-bottom:1px solid var(--line-soft)}
+  .vrow .gn{font-family:var(--serif);font-size:20px;color:var(--teal-bright);font-weight:600;width:26px}
+  .vrow .gt{font-size:25px;color:var(--ink);font-weight:500}
+  .vrow .ref{font-family:var(--serif);font-size:23px;font-weight:600;color:var(--teal);letter-spacing:.01em}
+
+  .callout{margin-top:24px;background:var(--teal);color:#F4F1E8;border-radius:12px;padding:18px 26px;font-size:20px;line-height:1.4;display:flex;align-items:center;gap:16px}
+  .callout b{color:#fff}
+  .callout .tag{flex:none;font-size:12px;letter-spacing:.2em;text-transform:uppercase;background:rgba(255,255,255,.16);padding:6px 12px;border-radius:20px;font-weight:600}
+  .note{margin-top:22px;font-size:19px;color:var(--ink-soft);font-style:italic;font-family:var(--serif);padding-left:18px;border-left:2px solid var(--teal)}
+  .refs{display:flex;flex-wrap:wrap;gap:10px 12px;margin-top:18px}
+  .refs .chip{font-family:var(--serif);font-size:17px;color:var(--teal);font-weight:600;background:var(--teal-wash);border:1px solid var(--line);border-radius:20px;padding:5px 14px}
+
+  /* diagram split */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;margin-top:30px}
+  .diagram{display:flex;align-items:center;justify-content:center}
+  .diagram svg{width:100%;max-width:440px;max-height:300px;height:auto}
+  .split .lead{font-size:24px;margin-top:0}
+  .split .bullets li{font-size:24px}
+  .split .bullets li span{font-size:19px}
+  .split .note{font-size:20px}
+  .dcap{text-align:center;font-family:var(--serif);font-size:20px;font-weight:600;color:var(--teal);margin-top:10px;letter-spacing:.02em}
+
+  /* biblia en un vistazo — cuadro con bordes */
+  .vcap{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--teal);margin-top:10px}
+  .vistazo{display:grid;grid-template-columns:1fr 68px 1fr;margin-top:18px;border:2px solid var(--teal);background:var(--paper-2)}
+  .testbox{display:flex;flex-direction:column}
+  .testbox.at{border-right:1px solid var(--line)}
+  .testbox.nt{border-left:1px solid var(--line)}
+  .testhead{background:var(--teal);color:#F4F1E8;font-family:var(--serif);font-weight:600;font-size:19px;padding:12px 18px;display:flex;justify-content:space-between;align-items:baseline}
+  .testhead span{font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;opacity:.82}
+  .catrow{display:grid;grid-template-columns:172px 1fr;border-top:1px solid var(--line);flex:1}
+  .catlabel{padding:8px 16px;border-right:1px solid var(--line);background:var(--teal-wash);display:flex;flex-direction:column;justify-content:center}
+  .catlabel b{font-size:15px;font-weight:700;color:var(--teal);line-height:1.15}
+  .catlabel span{font-size:12px;color:var(--ink-faint);letter-spacing:.06em;margin-top:2px}
+  .catbooks{padding:8px 18px;font-size:15px;line-height:1.4;color:var(--ink);display:flex;align-items:center}
+  .crosscol{display:flex;align-items:center;justify-content:center}
+  .crosscol svg{width:36px;height:54px;fill:var(--teal)}
+  .vistazo-foot{display:grid;grid-template-columns:1fr 68px 1fr;border:2px solid var(--teal);border-top:none;margin-top:-2px}
+  .vf{padding:9px 18px;font-size:14px;line-height:1.4;color:var(--ink-soft);font-style:italic;font-family:var(--serif)}
+  .vf.mid{display:flex;align-items:center;justify-content:center;text-align:center;font-size:12px;font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);border-left:1px solid var(--line);border-right:1px solid var(--line)}
+
+  .closing{align-items:center;justify-content:center;text-align:center}
+  .closing .glyph{font-family:var(--serif);font-size:70px;color:var(--teal);font-weight:600;line-height:1}
+  .closing h1{font-family:var(--serif);font-weight:500;font-size:42px;color:var(--ink);margin-top:16px;max-width:24ch}
+  .closing p{margin-top:16px;font-size:17px;color:var(--ink-soft);font-style:italic;font-family:var(--serif);max-width:44ch}
+  .closing .rule{width:90px;height:3px;background:var(--gold);margin:28px auto 0}
+
+  .slide.is-active .anim{animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
+  .slide.is-active .anim:nth-child(1){animation-delay:.05s}
+  .slide.is-active .anim:nth-child(2){animation-delay:.13s}
+  .slide.is-active .anim:nth-child(3){animation-delay:.21s}
+  .slide.is-active .anim:nth-child(4){animation-delay:.29s}
+  .slide.is-active .anim:nth-child(5){animation-delay:.37s}
+  .slide.is-active .anim:nth-child(6){animation-delay:.45s}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+  .controls{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:50;background:rgba(20,26,24,.72);backdrop-filter:blur(8px);padding:8px 10px;border-radius:40px;border:1px solid rgba(255,255,255,.08);opacity:.25;transition:opacity .3s}
+  .controls:hover{opacity:1}
+  .controls button{width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;background:rgba(255,255,255,.10);color:#F4F1E8;font-size:17px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+  .controls button:hover{background:var(--teal-bright)}
+  .controls .count{color:#E7E2D6;font-size:13px;letter-spacing:.12em;min-width:54px;text-align:center;font-variant-numeric:tabular-nums}
+  .progress{position:fixed;top:0;left:0;height:3px;background:var(--teal-bright);z-index:60;transition:width .4s ease}
+  .hint{position:fixed;bottom:26px;right:24px;color:rgba(255,255,255,.32);font-size:11px;letter-spacing:.1em;z-index:50}
+
+  @media print{
+    @page{size:13.333in 7.5in;margin:0}
+    html,body{height:auto;overflow:visible;background:#fff}
+    .viewport{position:static;display:block}
+    .stage{width:auto;height:auto;transform:none!important;box-shadow:none}
+    .slide{position:relative;inset:auto;opacity:1!important;visibility:visible!important;page-break-after:always;break-after:page;box-shadow:none}
+    .slide:last-child{page-break-after:auto}
+    .slide .anim{animation:none!important}
+    .controls,.hint,.progress{display:none!important}
+    .slide::after{opacity:.45}
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<div class="viewport">
+  <div class="stage" id="stage">
+
+    <!-- 1 · PORTADA -->
+    <section class="slide cover is-active">
+      <div class="deco"></div>
+      <div class="kicker anim">La Serie 2:7</div>
+      <div class="glyph anim">2:7</div>
+      <h1 class="anim">La oración y la Palabra de Dios</h1>
+      <div class="sess anim"><b>Sesión 5</b><span>Discipulado · Grupo virtual</span></div>
+      <div class="ref">«Que la palabra de Cristo habite en ustedes con toda su riqueza.» — Colosenses 3:16</div>
+    </section>
+
+    <!-- 2 · BOSQUEJO -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 5</span><span class="mark">2:7</span></div>
+      <div class="body top">
+        <div class="eyebrow anim">Bosquejo de esta sesión</div>
+        <h1 class="title anim">Lo que veremos hoy</h1>
+        <div class="grid anim" style="margin-top:30px">
+          <ul class="bullets">
+            <li>Abrir en oración</li>
+            <li>Repaso de memoria <span>— las tres Garantías</span></li>
+            <li>Compartir lo leído y marcado</li>
+            <li>Sugerencias prácticas en cuanto a la oración</li>
+          </ul>
+          <ul class="bullets">
+            <li>Los puntos sobresalientes de mi lectura</li>
+            <li>Estudio bíblico «La Palabra»</li>
+            <li>Tarea para la sesión 6</li>
+            <li>Cerrar en oración</li>
+          </ul>
+        </div>
+        <p class="note anim">Dos temas unidos: escuchar a Dios en su Palabra y hablarle en oración.</p>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Bosquejo</span></div>
+    </section>
+
+    <!-- 3 · REPASO DE MEMORIA -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 5</span><span class="mark">2:7</span></div>
+      <div class="body top">
+        <div class="eyebrow anim">Repaso de memoria</div>
+        <h1 class="title anim">Las tres «Garantías»</h1>
+        <p class="lead anim" style="font-size:17px">En grupos de dos o tres, repasen sus versículos.</p>
+        <div class="vtable anim">
+          <div class="vrow"><div class="g"><span class="gn">a</span><span class="gt">Garantía de la salvación</span></div><span class="ref">1 Juan 5:11-12</span></div>
+          <div class="vrow"><div class="g"><span class="gn">b</span><span class="gt">Garantía de la oración respondida</span></div><span class="ref">Juan 16:24</span></div>
+          <div class="vrow"><div class="g"><span class="gn">c</span><span class="gt">Garantía de la victoria</span></div><span class="ref">1 Corintios 10:13</span></div>
+        </div>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Memorización</span></div>
+    </section>
+
+    <!-- 4 · PARA PENSAR: LEITH SAMUEL -->
+    <section class="slide scripture">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 5</span><span class="mark">2:7</span></div>
+      <div class="bigmark">2:7</div>
+      <p class="quote anim">«La oración no es un intento de hacer que Dios cambie de parecer; la <span class="em">oración verdadera es comunión con Dios</span>. Con ella expresamos nuestra confianza en él, buscamos conocer su mente y nos sometemos a su voluntad.»</p>
+      <div class="attr anim">Leith Samuel · Para pensar</div>
+    </section>
+
+    <!-- 5 · LA ORACIÓN Y LA COMUNIÓN -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 5</span><span class="mark">2:7</span></div>
+      <div class="body">
+        <div class="eyebrow anim">Sugerencias prácticas en cuanto a la oración</div>
+        <h1 class="title anim" style="font-size:44px">La oración: parte indispensable de la comunión</h1>
+        <p class="lead anim">Los mismos ingredientes que hacen la comunión entre personas la hacen posible entre nosotros y Dios.</p>
+        <div class="callout anim"><span class="tag">La clave</span><div>Dios habla conmigo mientras yo <b>escucho</b>, y yo hablo con él mientras él <b>escucha</b>.</div></div>
+        <div class="refs anim">
+          <span class="chip">1 Corintios 1:9</span>
+          <span class="chip">1 Juan 1:3</span>
+        </div>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Comunión</span></div>
+    </section>
+
+    <!-- 6 · MALA COMUNICACIÓN -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 5</span><span class="mark">2:7</span></div>
+      <div class="body top">
+        <div class="eyebrow anim">Un ejemplo</div>
+        <h1 class="title anim">La mala comunicación con Dios</h1>
+        <div class="split">
+          <div class="anim">
+            <div class="diagram">
+              <svg viewBox="0 0 560 300" role="img" aria-label="Diagrama de mala comunicación con Dios">
+                <defs><marker id="ah1" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1E5B57"/></marker></defs>
+                <!-- izquierda: Dios habla -->
+                <path d="M150,34 L184,88 L116,88 Z" fill="#1E5B57" stroke-linejoin="round"/>
+                <text x="150" y="76" text-anchor="middle" fill="#F4F1E8" font-family="Libre Franklin,sans-serif" font-size="15" font-weight="700">DIOS</text>
+                <g fill="#1E5B57"><circle cx="150" cy="176" r="13"/><path d="M131,232 C131,200 138,193 150,193 C162,193 169,200 169,232 Z"/></g>
+                <path d="M180,86 C112,104 112,158 148,160" fill="none" stroke="#1E5B57" stroke-width="2.4" marker-end="url(#ah1)"/>
+                <!-- línea de ruptura -->
+                <path d="M280,18 L266,58 L292,98 L266,138 L292,178 L266,218 L280,282" fill="none" stroke="#B0894E" stroke-width="2.4"/>
+                <!-- derecha: la persona ora -->
+                <path d="M410,34 L444,88 L376,88 Z" fill="#1E5B57" stroke-linejoin="round"/>
+                <text x="410" y="76" text-anchor="middle" fill="#F4F1E8" font-family="Libre Franklin,sans-serif" font-size="15" font-weight="700">DIOS</text>
+                <g fill="#1E5B57"><circle cx="410" cy="176" r="13"/><path d="M391,232 C391,200 398,193 410,193 C422,193 429,200 429,232 Z"/></g>
+                <path d="M432,160 C486,150 486,104 414,88" fill="none" stroke="#1E5B57" stroke-width="2.4" marker-end="url(#ah1)"/>
+              </svg>
+            </div>
+            <div class="dcap">Mala comunicación</div>
+          </div>
+          <div class="anim">
+            <ul class="bullets">
+              <li>Dios nos «habla» mientras leemos la Biblia…</li>
+              <li>…pero luego oramos por temas que no se relacionan con lo que él acaba de decir.</li>
+              <li>Es como interrumpir a un amigo para cambiar de tema.</li>
+            </ul>
+            <p class="note">La conversación de doble vía con Dios se rompe.</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Mala comunicación</span></div>
+    </section>
+
+    <!-- 7 · COMUNICACIÓN EFECTIVA -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 5</span><span class="mark">2:7</span></div>
+      <div class="body top">
+        <div class="eyebrow anim">Un ejemplo</div>
+        <h1 class="title anim">La comunicación efectiva con Dios</h1>
+        <div class="split">
+          <div class="anim">
+            <div class="diagram">
+              <svg viewBox="0 0 320 300" role="img" aria-label="Diagrama de comunicación efectiva con Dios">
+                <defs><marker id="ah2" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1E5B57"/></marker></defs>
+                <path d="M160,30 L196,86 L124,86 Z" fill="#1E5B57" stroke-linejoin="round"/>
+                <text x="160" y="73" text-anchor="middle" fill="#F4F1E8" font-family="Libre Franklin,sans-serif" font-size="15" font-weight="700">DIOS</text>
+                <g fill="#1E5B57"><circle cx="160" cy="184" r="14"/><path d="M139,244 C139,210 147,203 160,203 C173,203 181,210 181,244 Z"/></g>
+                <!-- Dios habla (baja, izq) -->
+                <path d="M144,88 C86,106 86,158 150,166" fill="none" stroke="#1E5B57" stroke-width="2.6" marker-end="url(#ah2)"/>
+                <!-- persona responde (sube, der) -->
+                <path d="M176,166 C238,158 238,106 178,88" fill="none" stroke="#1E5B57" stroke-width="2.6" marker-end="url(#ah2)"/>
+              </svg>
+            </div>
+            <div class="dcap">Comunicación efectiva</div>
+          </div>
+          <div class="anim">
+            <p class="lead" style="margin-top:0;font-size:17px">Le respondemos a Dios en oración a partir de lo que él nos dijo. Dos maneras:</p>
+            <ul class="bullets" style="margin-top:16px">
+              <li>Coméntale a Dios cada vez que marcas algo en tu Biblia.</li>
+              <li>Al terminar de leer, vuelve en oración sobre lo que marcaste: <span>agradece o alaba · pide ayuda para aplicarlo · háblale de lo que te trajo a la mente.</span></li>
+            </ul>
+            <p class="note">Las «otras oraciones» quedan para el final.</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Comunicación efectiva</span></div>
+    </section>
+
+    <!-- 8 · HABLAR Y ESCUCHAR -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 5</span><span class="mark">2:7</span></div>
+      <div class="body">
+        <div class="eyebrow anim">La oración tiene dos lados</div>
+        <h1 class="title anim">Hablar… y escuchar</h1>
+        <div class="list anim">
+          <div class="item"><div class="num">·</div><div><div class="it-h">Dios nos habla principalmente por las Escrituras</div><div class="it-s">Y nosotros le hablamos al orar, en el corazón o en voz alta.</div></div></div>
+          <div class="item"><div class="num">·</div><div><div class="it-h">Aprendemos a «escuchar» a Dios</div><div class="it-s">Atentos a las impresiones o estímulos que él pone en la mente y el corazón mientras leemos u oramos.</div></div></div>
+        </div>
+        <div class="refs anim">
+          <span class="chip">Salmo 27:8</span>
+          <span class="chip">Salmo 143:8-10</span>
+        </div>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Hablar y escuchar</span></div>
+    </section>
+
+    <!-- 9 · LA TRINIDAD EN LA ORACIÓN -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 5</span><span class="mark">2:7</span></div>
+      <div class="body top">
+        <div class="eyebrow anim">¿De qué manera participa la Trinidad?</div>
+        <h1 class="title anim">Oramos al Padre, en el Hijo, por el Espíritu</h1>
+        <div class="grid3 anim">
+          <div class="colcard"><h3>El Padre</h3><p>Nuestras oraciones se dirigen principalmente a él.<span class="ref">Mateo 6:9</span></p></div>
+          <div class="colcard"><h3>El Hijo</h3><p>Llegamos al Padre por los méritos de Cristo, en su nombre.<span class="ref">Juan 16:23-24</span></p></div>
+          <div class="colcard"><h3>El Espíritu</h3><p>Nos guía y intercede por nosotros cuando no sabemos qué pedir.<span class="ref">Romanos 8:26</span></p></div>
+        </div>
+        <p class="note anim">«Los gemidos que no se pueden expresar son frecuentemente las oraciones que no se pueden rechazar.» — C. H. Spurgeon</p>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>La Trinidad</span></div>
+    </section>
+
+    <!-- 10 · LOS PUNTOS SOBRESALIENTES -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 5</span><span class="mark">2:7</span></div>
+      <div class="body top">
+        <div class="eyebrow anim">Los puntos sobresalientes de mi lectura</div>
+        <h1 class="title anim" style="font-size:46px">Anota lo que Dios te dice</h1>
+        <div class="grid anim" style="margin-top:26px">
+          <div class="colcard">
+            <h3>Cómo usarlos</h3>
+            <ul class="bullets">
+              <li>Lee y marca la Biblia a diario</li>
+              <li>Elige el pensamiento que más te impresione</li>
+              <li>Anota la cita, el versículo y cómo te impresionó</li>
+            </ul>
+          </div>
+          <div class="colcard">
+            <h3>Por qué usarlos</h3>
+            <ul class="bullets">
+              <li>Te dan algo en qué reflexionar cada día</li>
+              <li>Revelan patrones de cómo Dios trata contigo</li>
+              <li>Enfocan tu mente y estimulan la regularidad</li>
+            </ul>
+          </div>
+        </div>
+        <p class="note anim">Meta práctica: leer al menos cinco de los siete días de la semana.</p>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Mi lectura</span></div>
+    </section>
+
+    <!-- 11 · LA PALABRA — PARA PENSAR -->
+    <section class="slide scripture">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 5</span><span class="mark">2:7</span></div>
+      <div class="bigmark">2:7</div>
+      <p class="quote anim">La Biblia es el libro más extraordinario jamás escrito: unos <span class="em">40 autores</span>, a lo largo de <span class="em">1500 años</span>, en tres idiomas… con un solo tema, una figura central —Jesucristo— y un Autor supremo: <span class="em">el Espíritu de Dios</span>.</p>
+      <div class="attr anim">La Palabra · Para pensar</div>
+    </section>
+
+    <!-- 12 · INSPIRADA, CONFIABLE, SUFICIENTE -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 5</span><span class="mark">2:7</span></div>
+      <div class="body top">
+        <div class="eyebrow anim">La Palabra de Dios</div>
+        <h1 class="title anim">Inspirada · Confiable · Suficiente</h1>
+        <div class="grid3 anim">
+          <div class="colcard"><h3>Inspirada</h3><p>«Exhalada por Dios»: lo escrito por hombres fue espirado por él; ellos fueron sus voceros.<span class="ref">2 Timoteo 3:16 · 2 Pedro 1:20-21</span></p></div>
+          <div class="colcard"><h3>Confiable</h3><p>Los autores del A.T. y del N.T. atribuyen sus palabras a Dios mismo.<span class="ref">Jeremías 1:6-9 · 1 Tes. 2:13</span></p></div>
+          <div class="colcard"><h3>Suficiente</h3><p>Capacita por completo al pueblo de Dios para toda buena obra.<span class="ref">2 Timoteo 3:17</span></p></div>
+        </div>
+        <p class="note anim">«Inspirada» viene del griego «exhalado por Dios». Él habló a través de ellos. — John R. W. Stott</p>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>La Palabra</span></div>
+    </section>
+
+    <!-- 13 · CÓMO USÓ JESÚS LAS ESCRITURAS -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 5</span><span class="mark">2:7</span></div>
+      <div class="body">
+        <div class="eyebrow anim">Jesús dependía de la Palabra</div>
+        <h1 class="title anim">Cómo usó Jesús las Escrituras</h1>
+        <div class="list anim">
+          <div class="item"><div class="num">·</div><div><div class="it-h">Para distinguir la adoración genuina de la falsa</div><div class="it-s">Marcos 7:6-9</div></div></div>
+          <div class="item"><div class="num">·</div><div><div class="it-h">Para responder una pregunta difícil sobre la resurrección</div><div class="it-s">Marcos 12:24-27</div></div></div>
+          <div class="item"><div class="num">·</div><div><div class="it-h">Para evitar un argumento con un interrogador no sincero</div><div class="it-s">Lucas 10:25-28</div></div></div>
+        </div>
+        <p class="note anim">Si Jesús dependió de la Palabra para su vida y ministerio, cuánto más nosotros.</p>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Jesús y la Escritura</span></div>
+    </section>
+
+    <!-- 14 · LA BIBLIA EN UN VISTAZO (cuadro del 10) -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 5</span><span class="mark">2:7</span></div>
+      <div class="body top">
+        <div class="eyebrow anim">La Biblia en un vistazo · 66 libros</div>
+        <h1 class="title anim" style="font-size:36px">La Biblia en un vistazo</h1>
+        <div class="vcap anim">«El Nuevo está oculto en el Antiguo; el Antiguo se revela en el Nuevo.»</div>
+        <div class="vistazo anim">
+          <div class="testbox at">
+            <div class="testhead">Antiguo Testamento <span>39 libros</span></div>
+            <div class="catrow"><div class="catlabel"><b>Ley</b><span>5 libros</span></div><div class="catbooks">Génesis · Éxodo · Levítico · Números · Deuteronomio</div></div>
+            <div class="catrow"><div class="catlabel"><b>Historia y gobierno</b><span>12 libros</span></div><div class="catbooks">Josué · Jueces · Rut · 1–2 Samuel · 1–2 Reyes · 1–2 Crónicas · Esdras · Nehemías · Ester</div></div>
+            <div class="catrow"><div class="catlabel"><b>Poesía</b><span>5 libros</span></div><div class="catbooks">Job · Salmos · Proverbios · Eclesiastés · Cantares</div></div>
+            <div class="catrow"><div class="catlabel"><b>Profetas mayores</b><span>5 libros</span></div><div class="catbooks">Isaías · Jeremías · Lamentaciones · Ezequiel · Daniel</div></div>
+            <div class="catrow"><div class="catlabel"><b>Profetas menores</b><span>12 libros</span></div><div class="catbooks">Oseas · Joel · Amós · Abdías · Jonás · Miqueas · Nahúm · Habacuc · Sofonías · Hageo · Zacarías · Malaquías</div></div>
+          </div>
+          <div class="crosscol"><svg viewBox="0 0 30 44" aria-hidden="true"><rect x="11" y="0" width="8" height="44"/><rect x="0" y="12" width="30" height="8"/></svg></div>
+          <div class="testbox nt">
+            <div class="testhead">Nuevo Testamento <span>27 libros</span></div>
+            <div class="catrow"><div class="catlabel"><b>Evangelios</b><span>4 libros</span></div><div class="catbooks">Mateo · Marcos · Lucas · Juan</div></div>
+            <div class="catrow"><div class="catlabel"><b>Historia</b><span>1 libro</span></div><div class="catbooks">Hechos</div></div>
+            <div class="catrow"><div class="catlabel"><b>Cartas de Pablo</b><span>13 libros</span></div><div class="catbooks">Romanos · 1–2 Corintios · Gálatas · Efesios · Filipenses · Colosenses · 1–2 Tesalonicenses · 1–2 Timoteo · Tito · Filemón</div></div>
+            <div class="catrow"><div class="catlabel"><b>Cartas generales</b><span>8 libros</span></div><div class="catbooks">Hebreos · Santiago · 1–2 Pedro · 1–2–3 Juan · Judas</div></div>
+            <div class="catrow"><div class="catlabel"><b>Profecía</b><span>1 libro</span></div><div class="catbooks">Apocalipsis</div></div>
+          </div>
+        </div>
+        <div class="vistazo-foot anim">
+          <div class="vf">El A.T. anticipa el sacrificio de Cristo en la cruz.</div>
+          <div class="vf mid">≈400 años</div>
+          <div class="vf" style="text-align:right">El N.T. se basa en la obra que Cristo completó en la cruz.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 · LA PALABRA EN TU VIDA -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 5</span><span class="mark">2:7</span></div>
+      <div class="body top">
+        <div class="eyebrow anim">La Palabra de Dios en tu vida</div>
+        <h1 class="title anim">Medita, aplica, obedece</h1>
+        <div class="grid anim" style="margin-top:24px">
+          <ul class="bullets">
+            <li>Meditar lleva a aplicar, y aplicar al éxito <span>— Josué 1:8</span></li>
+            <li>La Escritura da guía, características y beneficio <span>— Salmo 19:7-8</span></li>
+          </ul>
+          <ul class="bullets">
+            <li>La Palabra es fuego, martillo y espejo <span>— Jer. 23:29 · Stg. 1:23-25</span></li>
+            <li>«La espada del Espíritu» para la batalla <span>— Efesios 6:17</span></li>
+          </ul>
+        </div>
+        <div class="callout anim" style="background:var(--gold)"><span class="tag">Lo esencial</span><div>La Biblia no fue dada solo para <b>informarnos</b>, sino para <b>transformarnos</b>.</div></div>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>En tu vida</span></div>
+    </section>
+
+    <!-- 16 · TAREA PARA LA SESIÓN 6 -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 5</span><span class="mark">2:7</span></div>
+      <div class="body">
+        <div class="eyebrow anim">Antes de la próxima vez</div>
+        <h1 class="title anim">Tarea para la sesión 6</h1>
+        <div class="list anim">
+          <div class="item"><div class="num">1</div><div><div class="it-h">Memorización</div><div class="it-s">Memoriza «Garantía del perdón» — 1 Juan 1:9.</div></div></div>
+          <div class="item"><div class="num">2</div><div><div class="it-h">Lectura bíblica</div><div class="it-s">Continúa leyendo y marcando tu Biblia.</div></div></div>
+          <div class="item"><div class="num">3</div><div><div class="it-h">Otras</div><div class="it-s">Completa «El tiempo a solas» (resume los ocho versículos) y lee y marca «El tiempo a solas, los planes de lectura y el estudio bíblico».</div></div></div>
+        </div>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Tarea</span></div>
+    </section>
+
+    <!-- 17 · CIERRE -->
+    <section class="slide closing">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 5</span><span class="mark">2:7</span></div>
+      <div class="glyph anim">2:7</div>
+      <h1 class="anim">La Palabra transforma la vida</h1>
+      <p class="anim">«Otros libros fueron dados para nuestra información; la Biblia fue dada para nuestra transformación.»</p>
+      <div class="rule anim"></div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Sesión 5</span></div>
+    </section>
+
+  </div>
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="controls">
+  <button id="prev" aria-label="Anterior">‹</button>
+  <span class="count" id="count">1 / 17</span>
+  <button id="next" aria-label="Siguiente">›</button>
+</div>
+<div class="hint">← →  para navegar</div>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  const stage=document.getElementById('stage');
+  const count=document.getElementById('count');
+  const progress=document.getElementById('progress');
+  let i=slides.findIndex(s=>s.classList.contains('is-active'));
+  if(i<0)i=0;
+  function show(n){
+    i=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach((s,k)=>s.classList.toggle('is-active',k===i));
+    count.textContent=(i+1)+' / '+slides.length;
+    progress.style.width=((i+1)/slides.length*100)+'%';
+  }
+  function scale(){
+    const pad=48;
+    const s=Math.min((innerWidth-pad)/1280,(innerHeight-pad)/720);
+    stage.style.transform='scale('+s+')';
+  }
+  document.getElementById('next').onclick=()=>show(i+1);
+  document.getElementById('prev').onclick=()=>show(i-1);
+  addEventListener('keydown',e=>{
+    if(['ArrowRight','PageDown',' '].includes(e.key)){show(i+1);e.preventDefault();}
+    else if(['ArrowLeft','PageUp'].includes(e.key)){show(i-1);e.preventDefault();}
+    else if(e.key==='Home')show(0);
+    else if(e.key==='End')show(slides.length-1);
+  });
+  addEventListener('resize',scale);
+  scale();show(i);
+</script>
+</body>
+</html>

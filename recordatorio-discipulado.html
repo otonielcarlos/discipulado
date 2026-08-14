@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recordatorio · La Serie 2:7 — Comienza el discipulado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F2E9;--paper-2:#FBF8F1;--ink:#22282A;--ink-soft:#565E5B;--ink-faint:#8C938E;
+    --teal:#1E5B57;--teal-bright:#2E837B;--teal-wash:#E7EEEB;--gold:#B0894E;
+    --line:rgba(30,91,87,.22);--line-soft:rgba(34,40,42,.12);
+    --serif:'Spectral',Georgia,serif;--sans:'Libre Franklin',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    min-height:100vh;display:flex;align-items:center;justify-content:center;
+    font-family:var(--sans);color:var(--ink);background:#cfcabd;
+    -webkit-font-smoothing:antialiased;padding:24px;
+  }
+
+  /* lienzo 16:9 — 1280 × 720 */
+  .slide{
+    position:relative;width:1280px;height:720px;background:var(--paper);
+    box-shadow:0 22px 60px rgba(0,0,0,.28);overflow:hidden;
+    padding:74px 92px 64px;display:flex;flex-direction:column;
+    transform-origin:center center;
+  }
+  /* lavados de color muy tenues */
+  .slide::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(900px 520px at 110% -10%, rgba(46,131,123,.10), transparent 60%),
+      radial-gradient(760px 480px at -12% 120%, rgba(176,137,78,.10), transparent 60%);
+  }
+  .slide > *{position:relative}
+
+  /* topbar */
+  .topbar{display:flex;align-items:center;justify-content:space-between;
+    border-bottom:2px solid var(--teal);padding-bottom:18px}
+  .topbar .series{font-size:13px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--teal-bright)}
+  .topbar .glyph{font-family:var(--serif);font-weight:600;font-size:40px;color:var(--teal);line-height:.8}
+
+  /* cuerpo en dos columnas — boxes a la izquierda, logo a la derecha */
+  .body{flex:1;display:grid;grid-template-columns:1.1fr .9fr;gap:72px;align-items:center;margin-top:6px}
+
+  .eyebrow{font-size:13px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--teal)}
+  .eyebrow::before{content:"— ";color:var(--gold)}
+  h1{font-family:var(--serif);font-weight:500;font-size:52px;line-height:1.05;color:var(--ink);margin-top:16px}
+  .lead{font-size:18px;line-height:1.55;color:var(--ink-soft);margin-top:18px;max-width:36ch}
+
+  /* columna derecha: logo */
+  .brand{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:26px}
+  .brand img{width:235px;max-width:100%;height:auto;display:block}
+  .verse{font-family:var(--serif);font-style:italic;font-size:20px;line-height:1.5;
+    color:var(--ink-soft);max-width:30ch}
+  .verse cite{display:block;font-style:normal;font-weight:600;font-size:12px;letter-spacing:.06em;
+    color:var(--teal);margin-top:10px;text-transform:uppercase}
+
+  /* tarjeta de fecha/hora a la izquierda */
+  .when{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:24px 30px;margin-top:24px;max-width:320px}
+  .when .label{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint)}
+  .when .val{font-family:var(--serif);font-weight:600;color:var(--teal);line-height:1.05}
+  .when .date{font-size:38px;margin-top:6px}
+  .when .day{font-size:17px;color:var(--ink-soft);font-family:var(--sans);font-weight:500;margin-top:3px}
+  .when .rule{height:1px;background:var(--line);margin:18px 0}
+  .when .time{font-size:38px;margin-top:6px}
+  .when .where{font-size:17px;color:var(--ink-soft);font-family:var(--sans);font-weight:500;margin-top:3px}
+
+  /* footer corrido */
+  .footer{display:flex;justify-content:space-between;gap:12px;
+    font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);
+    border-top:1px solid var(--line-soft);padding-top:14px}
+
+  @media print{
+    @page{size:13.333in 7.5in;margin:0}
+    body{background:#fff;padding:0}
+    .slide{box-shadow:none;transform:none!important}
+  }
+</style>
+</head>
+<body>
+  <div class="slide" id="slide">
+    <div class="topbar">
+      <span class="series">La Serie 2:7 · Recordatorio</span>
+      <span class="glyph">2:7</span>
+    </div>
+
+    <div class="body">
+      <div>
+        <div class="eyebrow">Comienza el discipulado</div>
+        <h1>Sesión Uno</h1>
+
+
+        <aside class="when">
+          <div class="label">Fecha</div>
+          <div class="val date">8 de julio</div>
+          <div class="day">Miércoles</div>
+          <div class="rule"></div>
+          <div class="label">Hora</div>
+          <div class="val time">8:00 p.&nbsp;m.</div>
+          <div class="where">Por Zoom</div>
+        </aside>
+      </div>
+
+      <div class="brand">
+        <img src="logo-2-7.webp" alt="Colossians 2:7 Series">
+        <p class="verse">
+          «Arráiguense profundamente en él y edifiquen toda la vida sobre él.»
+          <cite>Colosenses 2:7 · NTV</cite>
+        </p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>La Serie 2:7 — Creciendo firmes en la familia de Dios</span>
+      <span>Sesión 1</span>
+    </div>
+  </div>
+
+  <script>
+    // Escala el lienzo 16:9 para que quepa en cualquier ventana (solo en pantalla)
+    const slide = document.getElementById("slide");
+    function fit(){
+      const margin = 48;
+      const s = Math.min((window.innerWidth - margin) / 1280, (window.innerHeight - margin) / 720, 1);
+      slide.style.transform = "scale(" + s + ")";
+    }
+    fit();
+    window.addEventListener("resize", fit);
+  </script>
+</body>
+</html>

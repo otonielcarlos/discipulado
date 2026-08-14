@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reglamento Discipulado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F2E9;--paper-2:#FBF8F1;--ink:#22282A;--ink-soft:#565E5B;--ink-faint:#8C938E;
+    --teal:#1E5B57;--teal-bright:#2E837B;--teal-wash:#E7EEEB;--gold:#B0894E;
+    --line:rgba(30,91,87,.22);--line-soft:rgba(34,40,42,.12);
+    --serif:'Spectral',Georgia,serif;--sans:'Libre Franklin',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    min-height:100vh;display:flex;align-items:center;justify-content:center;
+    font-family:var(--sans);color:var(--ink);background:#cfcabd;
+    -webkit-font-smoothing:antialiased;padding:24px;
+  }
+
+  /* lienzo 16:9 — 1280 × 720 */
+  .slide{
+    position:relative;width:1280px;height:720px;background:var(--paper);
+    box-shadow:0 22px 60px rgba(0,0,0,.28);overflow:hidden;
+    padding:64px 92px 56px;display:flex;flex-direction:column;
+    transform-origin:center center;
+  }
+  .slide::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(900px 520px at 110% -10%, rgba(46,131,123,.10), transparent 60%),
+      radial-gradient(760px 480px at -12% 120%, rgba(176,137,78,.10), transparent 60%);
+  }
+  .slide > *{position:relative}
+
+  /* topbar */
+  .topbar{display:flex;align-items:center;justify-content:space-between;
+    border-bottom:2px solid var(--teal);padding-bottom:18px}
+  .topbar .series{font-size:15px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--teal-bright)}
+  .topbar .tag{font-family:var(--serif);font-weight:600;font-size:24px;color:var(--teal)}
+
+  /* encabezado */
+  .head{margin-top:30px}
+  .eyebrow{font-size:15px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--teal)}
+  .eyebrow::before{content:"— ";color:var(--gold)}
+  h1{font-family:var(--serif);font-weight:500;font-size:64px;line-height:1.02;color:var(--ink);margin-top:10px}
+
+  /* cuerpo dos columnas */
+  .body{flex:1;display:grid;grid-template-columns:.8fr 1.2fr;gap:72px;align-items:start;margin-top:44px}
+
+  section h2{font-family:var(--serif);font-size:30px;color:var(--teal);font-weight:600;
+    display:flex;align-items:center;gap:13px;margin-bottom:24px}
+  section h2 .n{font-family:var(--sans);font-size:15px;font-weight:700;color:#fff;background:var(--teal);
+    min-width:38px;height:38px;padding:0 9px;border-radius:19px;display:flex;align-items:center;justify-content:center;letter-spacing:.02em}
+
+  /* 01 · Sesión — lista de rombos */
+  .facts{list-style:none;display:flex;flex-direction:column;gap:22px}
+  .facts li{position:relative;padding-left:26px;font-size:24px;line-height:1.4;color:var(--ink)}
+  .facts li::before{content:"";position:absolute;left:0;top:11px;width:11px;height:11px;background:var(--teal);transform:rotate(45deg)}
+  .facts li b{font-family:var(--serif);color:var(--teal);font-weight:600;display:block;font-size:27px}
+  .facts li span{color:var(--ink-soft);font-size:19px}
+
+  /* 03 · Reglas — lista numerada */
+  .rules{list-style:none;counter-reset:r;display:flex;flex-direction:column;gap:22px}
+  .rules li{counter-increment:r;position:relative;padding-left:54px;font-size:24px;line-height:1.4;color:var(--ink)}
+  .rules li::before{content:counter(r);position:absolute;left:0;top:0;
+    width:36px;height:36px;border-radius:50%;background:var(--gold);color:#fff;
+    font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .rules li em{font-style:normal;color:var(--ink-soft);font-size:19px}
+  .rules .egr{display:block;margin-top:5px;font-family:var(--serif);font-style:italic;font-size:19px;color:var(--teal-bright)}
+
+  .footer{margin-top:18px;display:flex;justify-content:space-between;gap:12px;
+    font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);
+    border-top:1px solid var(--line-soft);padding-top:14px}
+
+  @media print{
+    @page{size:13.333in 7.5in;margin:0}
+    body{background:#fff;padding:0}
+    .slide{box-shadow:none;transform:none!important}
+  }
+</style>
+</head>
+<body>
+  <div class="slide" id="slide">
+    <div class="topbar">
+      <span class="series">Discipulado</span>
+      <span class="tag">Misión De Gracia</span>
+    </div>
+
+    <div class="head">
+      <!-- <div class="eyebrow">Instituto Bíblico Semilla de Mostaza</div> -->
+      <h1>Reglamento</h1>
+    </div>
+
+    <div class="body">
+      <section>
+        <h2><span class="n">01</span>Sesión</h2>
+        <ul class="facts">
+          <li><b>11 semanas</b></li>
+          <li><b>Miércoles</b><span>20:00</span></li>
+          <li><b>1.<sup>er</sup> Bloque</b><span>12 de agosto - 30 de octubre</span></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="n">02</span>Reglas</h2>
+        <ol class="rules">
+          <li>Cámara siempre encendida <em>(excepto en los descansos).</em></li>
+          <li>Nombre en Zoom
+            <span class="egr">Ej.: Tom</span></li>
+          <li>Evita distracciones <em>(no tomes la clase manejando, cocinando, en transporte, etc.).</em></li>
+          <li>No compartas el link.</li>
+          <li>Podemos grabar las clases <em>(aparta este tiempo).</em></li>
+        </ol>
+      </section>
+    </div>
+
+    <div class="footer">
+
+    </div>
+  </div>
+
+  <script>
+    const slide = document.getElementById("slide");
+    function fit(){
+      const margin = 48;
+      const s = Math.min((window.innerWidth - margin) / 1280, (window.innerHeight - margin) / 720, 1);
+      slide.style.transform = "scale(" + s + ")";
+    }
+    fit();
+    window.addEventListener("resize", fit);
+  </script>
+</body>
+</html>
