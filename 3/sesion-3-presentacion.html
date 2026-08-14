@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Serie 2:7 · Sesión 3 — La tiranía de lo urgente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F2E9;--paper-2:#FBF8F1;--ink:#22282A;--ink-soft:#5A625F;--ink-faint:#8C938E;
+    --teal:#1E5B57;--teal-bright:#2E837B;--teal-wash:#E7EEEB;
+    --line:rgba(30,91,87,.20);--line-soft:rgba(34,40,42,.12);--gold:#B0894E;
+    --serif:'Spectral',Georgia,'Times New Roman',serif;--sans:'Libre Franklin',system-ui,-apple-system,sans-serif;
+    --W:1280px;--H:720px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{background:#1a1f1d;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow:hidden}
+
+  .viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+  .stage{width:var(--W);height:var(--H);position:relative;transform-origin:center center;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+
+  .slide{
+    position:absolute;inset:0;width:var(--W);height:var(--H);background:var(--paper);
+    background-image:
+      radial-gradient(120% 90% at 88% 8%, rgba(46,131,123,.06), transparent 60%),
+      radial-gradient(100% 80% at 6% 100%, rgba(176,137,78,.05), transparent 55%);
+    padding:74px 92px 64px;display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .5s ease;overflow:hidden;
+  }
+  .slide.is-active{opacity:1;visibility:visible;z-index:2}
+  .slide::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E")}
+
+  .mark{font-family:var(--serif);font-weight:600;letter-spacing:.01em;color:var(--teal)}
+  .topbar{position:absolute;top:40px;left:92px;right:92px;display:flex;align-items:center;justify-content:space-between;z-index:3}
+  .topbar .series{font-size:12px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-faint)}
+  .topbar .mark{font-size:22px}
+  .footer{position:absolute;bottom:34px;left:92px;right:92px;display:flex;align-items:center;justify-content:space-between;
+    font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);z-index:3}
+
+  .eyebrow{font-size:14px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--teal-bright);display:flex;align-items:center;gap:14px;margin-bottom:16px}
+  .eyebrow::before{content:"";width:34px;height:2px;background:var(--teal);display:inline-block}
+  h1.title{font-family:var(--serif);font-weight:500;font-size:52px;line-height:1.06;letter-spacing:-.01em;color:var(--ink);max-width:22ch}
+  .lead{font-size:23px;line-height:1.5;color:var(--ink-soft);margin-top:18px;max-width:56ch;font-weight:400}
+  .body{flex:1;display:flex;flex-direction:column;justify-content:center}
+  .body.top{justify-content:flex-start;padding-top:6px}
+
+  .list{display:flex;flex-direction:column;gap:20px;margin-top:30px}
+  .item{display:flex;gap:22px;align-items:flex-start}
+  .num{flex:none;width:42px;height:42px;border-radius:50%;border:1.5px solid var(--teal);color:var(--teal);font-family:var(--serif);font-weight:600;font-size:20px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .item .it-h{font-size:25px;font-weight:600;color:var(--ink);line-height:1.25}
+  .item .it-s{font-size:20px;color:var(--ink-soft);line-height:1.45;margin-top:4px;max-width:70ch}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px 52px;margin-top:30px}
+  .bullets{list-style:none;display:flex;flex-direction:column;gap:15px}
+  .bullets li{position:relative;padding-left:28px;font-size:22px;line-height:1.4;color:var(--ink)}
+  .bullets li span{color:var(--ink-soft);font-size:18px}
+  .bullets li::before{content:"";position:absolute;left:0;top:10px;width:11px;height:11px;background:var(--teal);transform:rotate(45deg)}
+
+  .colcard{background:var(--paper-2);border:1px solid var(--line-soft);border-radius:14px;padding:26px 30px}
+  .colcard h3{font-family:var(--serif);font-weight:600;font-size:25px;color:var(--teal);margin-bottom:14px}
+  .colcard p{font-size:20px;line-height:1.5;color:var(--ink-soft)}
+
+  .cover{justify-content:center;align-items:flex-start;padding:0 96px}
+  .cover .kicker{font-size:14px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--teal-bright)}
+  .cover .glyph{font-family:var(--serif);font-weight:600;font-size:150px;line-height:.9;color:var(--teal);letter-spacing:-.02em;margin:8px 0 6px -6px;position:relative}
+  .cover .glyph::after{content:"";display:block;width:120px;height:4px;background:var(--gold);margin-top:26px}
+  .cover h1{font-family:var(--serif);font-weight:500;font-size:60px;line-height:1.04;color:var(--ink);max-width:17ch;margin-top:30px;letter-spacing:-.015em}
+  .cover .sess{display:flex;align-items:baseline;gap:16px;margin-top:30px}
+  .cover .sess b{font-family:var(--serif);font-weight:600;font-size:30px;color:var(--ink)}
+  .cover .sess span{font-size:15px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint)}
+  .cover .ref{position:absolute;bottom:64px;left:96px;font-style:italic;font-family:var(--serif);font-size:18px;color:var(--ink-soft)}
+  .cover .deco{position:absolute;top:0;right:0;width:300px;height:100%;background:linear-gradient(180deg,rgba(46,131,123,.10),rgba(30,91,87,.04));border-left:1px solid var(--line)}
+  .cover .deco::before{content:"2:7";position:absolute;bottom:48px;right:40px;font-family:var(--serif);font-size:90px;color:rgba(30,91,87,.10);font-weight:600}
+
+  .scripture{align-items:center;justify-content:center;text-align:center;padding:70px 130px}
+  .scripture .quote{font-family:var(--serif);font-weight:400;font-style:italic;font-size:40px;line-height:1.4;color:var(--ink);letter-spacing:-.005em;max-width:28ch}
+  .scripture .quote .em{color:var(--teal);font-style:italic;font-weight:500}
+  .scripture .attr{margin-top:34px;font-size:16px;letter-spacing:.28em;text-transform:uppercase;color:var(--teal-bright);font-weight:600}
+  .scripture .bigmark{position:absolute;top:60px;left:50%;transform:translateX(-50%);font-family:var(--serif);font-size:46px;color:var(--line);font-weight:600}
+
+  .vtable{margin-top:26px;border-top:1px solid var(--line)}
+  .vrow{display:flex;align-items:center;justify-content:space-between;padding:18px 6px;border-bottom:1px solid var(--line-soft)}
+  .vrow .g{display:flex;align-items:center;gap:18px}
+  .vrow .gn{font-family:var(--serif);font-size:20px;color:var(--teal-bright);font-weight:600;width:26px}
+  .vrow .gt{font-size:25px;color:var(--ink);font-weight:500}
+  .vrow .ref{font-family:var(--serif);font-size:23px;font-weight:600;color:var(--teal);letter-spacing:.01em}
+
+  .callout{margin-top:24px;background:var(--teal);color:#F4F1E8;border-radius:12px;padding:18px 26px;font-size:20px;line-height:1.4;display:flex;align-items:center;gap:16px}
+  .callout b{color:#fff}
+  .callout .tag{flex:none;font-size:12px;letter-spacing:.2em;text-transform:uppercase;background:rgba(255,255,255,.16);padding:6px 12px;border-radius:20px;font-weight:600}
+  .note{margin-top:22px;font-size:19px;color:var(--ink-soft);font-style:italic;font-family:var(--serif);padding-left:18px;border-left:2px solid var(--teal);max-width:78ch}
+
+  .closing{align-items:center;justify-content:center;text-align:center}
+  .closing .glyph{font-family:var(--serif);font-size:70px;color:var(--teal);font-weight:600;line-height:1}
+  .closing h1{font-family:var(--serif);font-weight:500;font-size:46px;color:var(--ink);margin-top:18px;max-width:24ch}
+  .closing p{margin-top:18px;font-size:20px;color:var(--ink-soft);font-style:italic;font-family:var(--serif);max-width:44ch}
+  .closing .rule{width:90px;height:3px;background:var(--gold);margin:30px auto 0}
+
+  .slide.is-active .anim{animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
+  .slide.is-active .anim:nth-child(1){animation-delay:.05s}
+  .slide.is-active .anim:nth-child(2){animation-delay:.13s}
+  .slide.is-active .anim:nth-child(3){animation-delay:.21s}
+  .slide.is-active .anim:nth-child(4){animation-delay:.29s}
+  .slide.is-active .anim:nth-child(5){animation-delay:.37s}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+  .controls{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:50;background:rgba(20,26,24,.72);backdrop-filter:blur(8px);padding:8px 10px;border-radius:40px;border:1px solid rgba(255,255,255,.08);opacity:.25;transition:opacity .3s}
+  .controls:hover{opacity:1}
+  .controls button{width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;background:rgba(255,255,255,.10);color:#F4F1E8;font-size:17px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+  .controls button:hover{background:var(--teal-bright)}
+  .controls .count{color:#E7E2D6;font-size:13px;letter-spacing:.12em;min-width:54px;text-align:center;font-variant-numeric:tabular-nums}
+  .progress{position:fixed;top:0;left:0;height:3px;background:var(--teal-bright);z-index:60;transition:width .4s ease}
+  .hint{position:fixed;bottom:26px;right:24px;color:rgba(255,255,255,.32);font-size:11px;letter-spacing:.1em;z-index:50}
+
+  @media print{
+    @page{size:13.333in 7.5in;margin:0}
+    html,body{height:auto;overflow:visible;background:#fff}
+    .viewport{position:static;display:block}
+    .stage{width:auto;height:auto;transform:none!important;box-shadow:none}
+    .slide{position:relative;inset:auto;opacity:1!important;visibility:visible!important;page-break-after:always;break-after:page;box-shadow:none}
+    .slide:last-child{page-break-after:auto}
+    .slide .anim{animation:none!important}
+    .controls,.hint,.progress{display:none!important}
+    .slide::after{opacity:.45}
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<div class="viewport">
+  <div class="stage" id="stage">
+
+    <!-- 1 · PORTADA -->
+    <section class="slide cover is-active">
+      <div class="deco"></div>
+      <div class="kicker anim">La Serie 2:7</div>
+      <div class="glyph anim">2:7</div>
+      <h1 class="anim">La tiranía de lo urgente</h1>
+      <div class="sess anim"><b>Sesión 3</b><span>Discipulado · Grupo virtual</span></div>
+      <div class="ref">«Muy de madrugada… salió a un lugar solitario para orar.» — Marcos 1:35</div>
+    </section>
+
+    <!-- 2 · BOSQUEJO -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 3</span><span class="mark">2:7</span></div>
+      <div class="body top">
+        <div class="eyebrow anim">Bosquejo de esta sesión</div>
+        <h1 class="title anim">Lo que veremos hoy</h1>
+        <div class="grid anim" style="margin-top:30px">
+          <ul class="bullets">
+            <li>Abrir en oración</li>
+            <li>Repasar juntos los versículos de memoria</li>
+            <li>Compartir lo leído y marcado</li>
+            <li>«La tiranía de lo urgente»</li>
+          </ul>
+          <ul class="bullets">
+            <li>La oración: primera parte</li>
+            <li>Cómo usar «Mi progreso en la lectura»</li>
+            <li>Tarea para la sesión 4</li>
+            <li>Cerrar en oración</li>
+          </ul>
+        </div>
+        <p class="note anim">El corazón de hoy: dejar que la oración —no lo urgente— gobierne nuestras prioridades.</p>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Bosquejo</span></div>
+    </section>
+
+    <!-- 3 · REPASO DE MEMORIA -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 3</span><span class="mark">2:7</span></div>
+      <div class="body top">
+        <div class="eyebrow anim">Una forma efectiva de repasar juntos</div>
+        <h1 class="title anim">Cómo repasar los versículos</h1>
+        <div class="grid anim" style="margin-top:28px">
+          <ul class="bullets">
+            <li>Cita primero lo que mejor sabes <span>— gana confianza</span></li>
+            <li>Actitud de servicio, ánimo y elogio <span>— Eclesiastés 4:9-10</span></li>
+            <li>Corrige solo cuando te lo pidan</li>
+          </ul>
+          <ul class="bullets">
+            <li>La meta: saber cada palabra perfectamente</li>
+            <li>Repite bien el versículo antes de pasar a otro</li>
+            <li>Repasa con quien use la misma traducción</li>
+          </ul>
+        </div>
+        <p class="note anim">Repasamos «Garantía de la salvación» (1 Juan 5:11-12) y «Garantía de la oración respondida» (Juan 16:24).</p>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Memorización</span></div>
+    </section>
+
+    <!-- 4 · LA TIRANÍA — EL PROBLEMA -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 3</span><span class="mark">2:7</span></div>
+      <div class="body top">
+        <div class="eyebrow anim">Charles E. Hummel</div>
+        <h1 class="title anim">La tiranía de lo urgente</h1>
+        <div class="list anim" style="margin-top:24px">
+          <div class="item"><div class="num">·</div><div><div class="it-h">Vivimos esclavos de lo urgente</div><div class="it-s">Nuestras vidas dejan un rastro de tareas inconclusas y una sensación de frustración.</div></div></div>
+          <div class="item"><div class="num">·</div><div><div class="it-h">El problema no es el tiempo, son las prioridades</div><div class="it-s">Lo urgente desplaza a lo importante: lo importante rara vez debe hacerse hoy; lo urgente exige acción ya.</div></div></div>
+          <div class="item"><div class="num">·</div><div><div class="it-h">Principio de Parkinson</div><div class="it-s">El trabajo se expande hasta llenar todo el tiempo disponible.</div></div></div>
+        </div>
+        <p class="note anim">«La perfección de los medios y la confusión de las metas describen nuestra época.» — Albert Einstein</p>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>El problema</span></div>
+    </section>
+
+    <!-- 5 · URGENTE VS IMPORTANTE -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 3</span><span class="mark">2:7</span></div>
+      <div class="body">
+        <div class="eyebrow anim">El corazón del problema</div>
+        <h1 class="title anim">Lo urgente vs. lo importante</h1>
+        <div class="grid anim" style="margin-top:28px">
+          <div class="colcard">
+            <h3>Lo urgente</h3>
+            <ul class="bullets">
+              <li>Grita por atención</li>
+              <li>Exige acción inmediata</li>
+              <li>Parece irresistible… y nos consume</li>
+            </ul>
+          </div>
+          <div class="colcard">
+            <h3>Lo importante</h3>
+            <ul class="bullets">
+              <li>Rara vez apremia</li>
+              <li>Se posterga con facilidad</li>
+              <li>Es lo que de veras vale</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callout anim" style="background:var(--gold)"><span class="tag">Para recordar</span><div>«Lo <b>bueno</b> es, con frecuencia, el enemigo de lo <b>mejor</b>.»</div></div>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Urgente e importante</span></div>
+    </section>
+
+    <!-- 6 · EL EJEMPLO DE JESÚS -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 3</span><span class="mark">2:7</span></div>
+      <div class="body">
+        <div class="eyebrow anim">El ejemplo de Jesús</div>
+        <h1 class="title anim">Terminó la obra encomendada</h1>
+        <div class="list anim">
+          <div class="item"><div class="num">·</div><div><div class="it-h">«Yo te di la gloria… al terminar la obra que me encargaste»</div><div class="it-s">Juan 17:4 — lo dijo la noche antes de morir, con la obra completada.</div></div></div>
+          <div class="item"><div class="num">·</div><div><div class="it-h">Muchas necesidades quedaron sin atender</div><div class="it-s">Su ministerio fue corto; no sanó ni enseñó a todos.</div></div></div>
+          <div class="item"><div class="num">·</div><div><div class="it-h">Aun así, completó lo que el Padre le encargó</div><div class="it-s">No hizo todo lo urgente; hizo la voluntad del Padre.</div></div></div>
+        </div>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>El ejemplo de Jesús</span></div>
+    </section>
+
+    <!-- 7 · ESPERE LAS INSTRUCCIONES -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 3</span><span class="mark">2:7</span></div>
+      <div class="body">
+        <div class="eyebrow anim">El secreto de Jesús</div>
+        <h1 class="title anim">Espere las instrucciones</h1>
+        <div class="list anim">
+          <div class="item"><div class="num">·</div><div><div class="it-h">Se apartaba a orar de madrugada</div><div class="it-s">Marcos 1:35 — antes del amanecer buscaba un lugar solitario.</div></div></div>
+          <div class="item"><div class="num">·</div><div><div class="it-h">En oración discernía la voluntad del Padre</div><div class="it-s">Día a día recibía su agenda de Dios, no de las demandas de otros.</div></div></div>
+          <div class="item"><div class="num">·</div><div><div class="it-h">Por eso podía resistir lo urgente</div><div class="it-s">La oración le daba libertad para hacer lo importante.</div></div></div>
+        </div>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Espere las instrucciones</span></div>
+    </section>
+
+    <!-- 8 · LA DEPENDENCIA LO LIBERA -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 3</span><span class="mark">2:7</span></div>
+      <div class="body">
+        <div class="eyebrow anim">La dependencia lo libera</div>
+        <h1 class="title anim">La libertad viene de depender de Dios</h1>
+        <div class="list anim">
+          <div class="item"><div class="num">·</div><div><div class="it-h">«Si el Hijo los libera, serán verdaderamente libres»</div><div class="it-s">Juan 8:32, 36 — la verdad, seguida día a día, nos libra de la tiranía de lo urgente.</div></div></div>
+          <div class="item"><div class="num">·</div><div><div class="it-h">La raíz de todo pecado es la autosuficiencia</div><div class="it-s">Querer vivir independientes de Dios. Lo opuesto es la oración: reconocer que lo necesitamos.</div></div></div>
+        </div>
+        <div class="callout anim"><span class="tag">P. T. Forsyth</span><div>«El <b>peor pecado</b> es la falta de oración.»</div></div>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Dependencia</span></div>
+    </section>
+
+    <!-- 9 · EVALÚA Y PERSEVERA -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 3</span><span class="mark">2:7</span></div>
+      <div class="body">
+        <div class="eyebrow anim">Evalúa y persevera</div>
+        <h1 class="title anim">Evalúa, planifica, persevera</h1>
+        <div class="grid anim" style="margin-top:28px">
+          <ul class="bullets">
+            <li>Haz un inventario espiritual: revisa el pasado</li>
+            <li>Planifica la semana y el mes</li>
+            <li>Esperar en Dios en oración es indispensable</li>
+          </ul>
+          <ul class="bullets">
+            <li>Aparta tiempo a solas: diario, semanal, mensual</li>
+            <li>Desarrolla tus fortalezas; confía en el Espíritu</li>
+            <li>Nada sustituye saber que hiciste su voluntad</li>
+          </ul>
+        </div>
+        <div class="callout anim"><span class="tag">Mateo 25:21</span><div>«Bien hecho, mi buen siervo fiel.»</div></div>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Evalúa</span></div>
+    </section>
+
+    <!-- 10 · LA ORACIÓN: PRIMERA PARTE -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 3</span><span class="mark">2:7</span></div>
+      <div class="body">
+        <div class="eyebrow anim">La oración: primera parte</div>
+        <h1 class="title anim">Su comunicación con Dios</h1>
+        <div class="list anim">
+          <div class="item"><div class="num">·</div><div><div class="it-h">Es un privilegio acercarnos a Dios</div><div class="it-s">Vengamos con confianza al trono de la gracia — Hebreos 4:16.</div></div></div>
+          <div class="item"><div class="num">·</div><div><div class="it-h">Dios es nuestro refugio</div><div class="it-s">Derrama tu corazón ante él — Salmo 62:8.</div></div></div>
+          <div class="item"><div class="num">·</div><div><div class="it-h">El Espíritu nos ayuda a orar</div><div class="it-s">Cuando no sabemos qué pedir, él intercede — Romanos 8:26-27.</div></div></div>
+        </div>
+        <p class="note anim">Dominar la técnica no basta; el poder está en confiar en las promesas de Dios. — J. Oswald Sanders</p>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>La oración</span></div>
+    </section>
+
+    <!-- 11 · CINCO CLASES DE ORACIÓN -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 3</span><span class="mark">2:7</span></div>
+      <div class="body top">
+        <div class="eyebrow anim">Las formas de la oración</div>
+        <h1 class="title anim">Cinco clases de oración</h1>
+        <div class="vtable anim">
+          <div class="vrow"><div class="g"><span class="gn">1</span><span class="gt">Alabanza</span></div><span class="ref">Hebreos 13:15</span></div>
+          <div class="vrow"><div class="g"><span class="gn">2</span><span class="gt">Agradecimiento</span></div><span class="ref">Efesios 5:20</span></div>
+          <div class="vrow"><div class="g"><span class="gn">3</span><span class="gt">Confesión</span></div><span class="ref">Salmo 38:18</span></div>
+          <div class="vrow"><div class="g"><span class="gn">4</span><span class="gt">Intercesión</span></div><span class="ref">Santiago 5:16</span></div>
+          <div class="vrow"><div class="g"><span class="gn">5</span><span class="gt">Petición</span></div><span class="ref">Lucas 11:3</span></div>
+        </div>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Clases de oración</span></div>
+    </section>
+
+    <!-- 12 · REQUISITOS PARA ORAR -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 3</span><span class="mark">2:7</span></div>
+      <div class="body">
+        <div class="eyebrow anim">La práctica de la oración</div>
+        <h1 class="title anim">Requisitos para orar</h1>
+        <div class="grid anim" style="margin-top:30px">
+          <ul class="bullets">
+            <li>No aferrarse al pecado <span>— Salmo 66:18</span></li>
+            <li>Pedir creyendo que se recibirá <span>— Mateo 21:22</span></li>
+            <li>Permanecer en Cristo y su Palabra <span>— Juan 15:7</span></li>
+          </ul>
+          <ul class="bullets">
+            <li>Pedir en el nombre de Jesús <span>— Juan 16:24</span></li>
+            <li>Pedir conforme a su voluntad <span>— 1 Juan 5:14-15</span></li>
+            <li>No pedir por interés propio <span>— Santiago 4:3</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Requisitos</span></div>
+    </section>
+
+    <!-- 13 · MI PROGRESO EN LA LECTURA -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 3</span><span class="mark">2:7</span></div>
+      <div class="body">
+        <div class="eyebrow anim">Herramienta de lectura</div>
+        <h1 class="title anim">«Mi progreso en la lectura»</h1>
+        <div class="list anim">
+          <div class="item"><div class="num">·</div><div><div class="it-h">Un registro sencillo de tu lectura diaria</div><div class="it-s">Lleva la cuenta de los capítulos que vas leyendo en la Biblia.</div></div></div>
+          <div class="item"><div class="num">·</div><div><div class="it-h">Marca cada capítulo al leerlo</div><div class="it-s">Una diagonal o una «X» sobre el número; termina un libro antes de empezar otro.</div></div></div>
+          <div class="item"><div class="num">·</div><div><div class="it-h">Anota la fecha en que terminas cada libro</div><div class="it-s">Un acceso fácil que sirve de estímulo para seguir leyendo.</div></div></div>
+        </div>
+        <p class="note anim">Puedes descargar copias adicionales en serie2-7.com (páginas 155-156).</p>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Mi progreso</span></div>
+    </section>
+
+    <!-- 14 · TAREA PARA LA SESIÓN 4 -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 3</span><span class="mark">2:7</span></div>
+      <div class="body">
+        <div class="eyebrow anim">Antes de la próxima vez</div>
+        <h1 class="title anim">Tarea para la sesión 4</h1>
+        <div class="list anim">
+          <div class="item"><div class="num">1</div><div><div class="it-h">Memorización</div><div class="it-s">Memoriza «Garantía de la victoria» (1 Corintios 10:13) y repasa en voz alta las dos anteriores.</div></div></div>
+          <div class="item"><div class="num">2</div><div><div class="it-h">Lectura bíblica</div><div class="it-s">Continúa leyendo y marcando; usa «Mi progreso en la lectura».</div></div></div>
+          <div class="item"><div class="num">3</div><div><div class="it-h">Estudio bíblico</div><div class="it-s">Completa «La oración: segunda parte».</div></div></div>
+          <div class="item"><div class="num">4</div><div><div class="it-h">Otras</div><div class="it-s">Lee y marca «La ilustración de la rueda».</div></div></div>
+        </div>
+      </div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Tarea</span></div>
+    </section>
+
+    <!-- 15 · CIERRE -->
+    <section class="slide closing">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 3</span><span class="mark">2:7</span></div>
+      <div class="glyph anim">2:7</div>
+      <h1 class="anim">Terminemos en oración</h1>
+      <p class="anim">«Yo te di la gloria aquí en la tierra, al terminar la obra que me encargaste.» — Juan 17:4</p>
+      <div class="rule anim"></div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Sesión 3</span></div>
+    </section>
+
+  </div>
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="controls">
+  <button id="prev" aria-label="Anterior">‹</button>
+  <span class="count" id="count">1 / 15</span>
+  <button id="next" aria-label="Siguiente">›</button>
+</div>
+<div class="hint">← →  para navegar</div>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  const stage=document.getElementById('stage');
+  const count=document.getElementById('count');
+  const progress=document.getElementById('progress');
+  let i=slides.findIndex(s=>s.classList.contains('is-active'));
+  if(i<0)i=0;
+  function show(n){
+    i=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach((s,k)=>s.classList.toggle('is-active',k===i));
+    count.textContent=(i+1)+' / '+slides.length;
+    progress.style.width=((i+1)/slides.length*100)+'%';
+  }
+  function scale(){
+    const pad=48;
+    const s=Math.min((innerWidth-pad)/1280,(innerHeight-pad)/720);
+    stage.style.transform='scale('+s+')';
+  }
+  document.getElementById('next').onclick=()=>show(i+1);
+  document.getElementById('prev').onclick=()=>show(i-1);
+  addEventListener('keydown',e=>{
+    if(['ArrowRight','PageDown',' '].includes(e.key)){show(i+1);e.preventDefault();}
+    else if(['ArrowLeft','PageUp'].includes(e.key)){show(i-1);e.preventDefault();}
+    else if(e.key==='Home')show(0);
+    else if(e.key==='End')show(slides.length-1);
+  });
+  addEventListener('resize',scale);
+  scale();show(i);
+</script>
+</body>
+</html>

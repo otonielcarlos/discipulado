@@ -47,6 +47,12 @@ Ambos se entregan en **HTML**; el **PDF lo exporta el usuario** desde el navegad
 Principios:
 - **Un acento, no varios.** El teal manda; el dorado es un detalle ocasional.
 - **Poco texto por slide.** Título grande + 3–6 puntos. El resto lo dice el expositor.
+- **Legible al proyectar.** El texto debe verse bien en pantalla y por Zoom. Cuando hay poco contenido, **agranda la tipografía para llenar el espacio** en vez de dejar huecos. Tamaños mínimos de referencia para las presentaciones 16:9 (subir si sobra espacio):
+  - Bullets / cuerpo: **≥ 21px** (detalle secundario ≥ 18px).
+  - Listas numeradas: título de ítem **≥ 24px**, detalle **≥ 20px**.
+  - Tarjetas (`.colcard`): título ≥ 25px, cuerpo ≥ 20px.
+  - Filas de tabla de versículos (`.vrow`): tema ≥ 24px, cita ≥ 22px.
+  - Nota / callout: ≥ 19px. Cita bíblica centrada: **≥ 36px**.
 - **La Escritura es protagonista.** Los versículos van en serif, grandes y centrados.
 - **Detalles discretos.** Grano de papel sutil y lavados de color muy tenues para dar textura sin distraer.
 
