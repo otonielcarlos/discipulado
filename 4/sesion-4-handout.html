@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Resumen · La Serie 2:7 — Sesión 4</title>
+<link rel="icon" type="image/webp" href="../logo-2-7.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&amp;family=Libre+Franklin:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF8F1;--ink:#22282A;--ink-soft:#565E5B;--ink-faint:#8C938E;
+    --teal:#1E5B57;--teal-bright:#2E837B;--teal-wash:#E7EEEB;--gold:#B0894E;
+    --line:rgba(30,91,87,.22);--line-soft:rgba(34,40,42,.12);
+    --serif:'Spectral',Georgia,serif;--sans:'Libre Franklin',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#cfcabd;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased}
+  .page{
+    width:8.5in;min-height:11in;margin:24px auto;background:var(--paper);
+    padding:0.5in 0.68in 0.4in;position:relative;
+    box-shadow:0 18px 50px rgba(0,0,0,.25);
+  }
+
+  header{display:flex;align-items:flex-start;justify-content:space-between;
+    border-bottom:2px solid var(--teal);padding-bottom:11px}
+  header .series{font-size:10px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--teal-bright)}
+  header h1{font-family:var(--serif);font-weight:500;font-size:27px;line-height:1.1;color:var(--ink);margin-top:5px;max-width:22ch}
+  header .sess{font-family:var(--serif);font-size:18px;color:var(--ink-soft);margin-top:4px}
+  header .glyph{font-family:var(--serif);font-weight:600;font-size:54px;color:var(--teal);line-height:.85}
+
+  .verse{background:var(--teal-wash);border-left:4px solid var(--teal);border-radius:6px;
+    padding:10px 16px;margin:12px 0;font-family:var(--serif);font-style:italic;font-size:13.5px;line-height:1.35;color:var(--ink)}
+  .verse b{font-style:normal;font-weight:600;color:var(--teal);font-size:12px;letter-spacing:.04em;display:block;margin-top:4px}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:10px}
+  section h2{font-family:var(--serif);font-size:16px;color:var(--teal);font-weight:600;
+    display:flex;align-items:center;gap:8px;margin-bottom:6px}
+  section h2 .n{width:20px;height:20px;border-radius:50%;background:var(--teal);color:#fff;
+    font-family:var(--sans);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+
+  ul{list-style:none}
+  li{position:relative;padding-left:16px;font-size:11.5px;line-height:1.35;color:var(--ink);margin-bottom:3px}
+  li::before{content:"";position:absolute;left:0;top:5px;width:6px;height:6px;background:var(--teal);transform:rotate(45deg)}
+  li span{color:var(--ink-soft)}
+  .refs{font-size:10.4px;line-height:1.35;color:var(--ink-soft);margin-top:5px}
+
+  .quote-mini{font-family:var(--serif);font-size:10.8px;line-height:1.32;font-style:italic;color:var(--ink-soft);
+    border-left:2px solid var(--gold);padding-left:9px;margin-top:6px}
+  .quote-mini b{font-family:var(--sans);font-style:normal;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+
+  .wheel{margin-top:11px;padding-top:10px;border-top:1px solid var(--line)}
+  .wheel .grid2{margin-top:0}
+  .wheel-map{display:grid;grid-template-columns:76px 1fr;gap:10px;align-items:center}
+  .hub{width:76px;height:76px;border:10px solid var(--teal-wash);outline:1px solid var(--teal);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--serif);font-weight:600;color:#fff;background:var(--teal);font-size:13px}
+
+  .balance{margin-top:9px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 14px;
+    font-family:var(--serif);font-size:11.3px;line-height:1.35;color:var(--ink-soft)}
+  .balance b{color:var(--teal)}
+
+  .tarea{margin-top:9px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 15px}
+  .tarea h2{margin-bottom:5px}
+  .tarea ol{list-style:none;counter-reset:t;display:grid;grid-template-columns:1fr 1fr;column-gap:18px}
+  .tarea li{counter-increment:t;padding-left:27px}
+  .tarea li::before{content:counter(t);background:var(--gold);color:#fff;width:18px;height:18px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;top:0;transform:none}
+  .tarea li b{color:var(--ink)}
+
+  footer{margin-top:8px;padding-top:7px;border-top:1px solid var(--line-soft);
+    display:flex;justify-content:space-between;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint)}
+
+  @media print{
+    @page{size:Letter;margin:0}
+    body{background:#fff}
+    .page{margin:0;box-shadow:none;width:8.5in;min-height:11in}
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <div class="series">La Serie 2:7 · Resumen de la sesión</div>
+        <h1>La oración y la vida equilibrada</h1>
+        <div class="sess">Sesión 4</div>
+      </div>
+      <div class="glyph">2:7</div>
+    </header>
+
+    <div class="verse">
+      «Padre nuestro que estás en el cielo, que sea siempre santo tu nombre. Que tu reino venga pronto. Que se cumpla tu voluntad… Danos hoy el alimento que necesitamos.»
+      <b>— Mateo 6:9-13</b>
+    </div>
+
+    <div class="grid2">
+      <section>
+        <h2><span class="n">1</span>El patrón de Cristo</h2>
+        <ul>
+          <li><b>Centradas en Dios:</b> que su nombre sea santo, que venga su reino y que se cumpla su voluntad.</li>
+          <li><b>Centradas en las personas:</b> el pan diario, el perdón de nuestras deudas y ser librados de la tentación.</li>
+          <li>La oración empieza reconociendo a Dios; eso pone todo lo demás en orden.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="n">2</span>Interceder por otros</h2>
+        <ul>
+          <li>Familia; amigos no cristianos; misioneros y obreros; quienes se oponen.</li>
+          <li>Pastor e iglesia; autoridades; más obreros para la mies; necesidades personales.</li>
+        </ul>
+        <p class="refs">Romanos 10:1 · 1 Timoteo 2:1-4 · Mateo 9:37-38 · Efesios 3:14-21</p>
+      </section>
+    </div>
+
+    <div class="grid2">
+      <section>
+        <h2><span class="n">3</span>Libres de la preocupación</h2>
+        <ul>
+          <li><b>Qué hacer:</b> no preocuparnos; en todo, orar, dar gracias y presentar nuestras peticiones.</li>
+          <li><b>La promesa:</b> la paz de Dios guardará nuestro corazón y nuestra mente en Cristo Jesús. <span>Filipenses 4:6-7.</span></li>
+        </ul>
+        <p class="quote-mini">«Debemos orar cuando tenemos ganas de hacerlo […] Debemos orar cuando no tenemos el estado de ánimo apropiado…» <b>— Charles H. Spurgeon</b></p>
+      </section>
+
+      <section>
+        <h2><span class="n">4</span>Tiempo con Dios</h2>
+        <ul>
+          <li><b>María:</b> se sentó a los pies de Jesús, escuchó su palabra y escogió la mejor parte.</li>
+          <li><b>Marta:</b> distraída, preocupada e inquieta, se perdió el momento con Jesús. <span>Lucas 10:38-42.</span></li>
+        </ul>
+        <p class="quote-mini">«Pase bastante tiempo con Dios; deje ir otras cosas, pero no lo descuide a él.» <b>— Oswald Chambers</b></p>
+      </section>
+    </div>
+
+    <div class="wheel">
+      <div class="grid2">
+        <section>
+          <h2><span class="n">5</span>La ilustración de la rueda</h2>
+          <div class="wheel-map">
+            <div class="hub">Cristo</div>
+            <ul>
+              <li><b>Centro:</b> Cristo, Señor de la vida.</li>
+              <li><b>Vertical:</b> la Palabra y la oración.</li>
+              <li><b>Horizontal:</b> comunión y testimonio.</li>
+              <li><b>Borde:</b> obediencia en acción.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2><span class="n">6</span>Las tres dimensiones</h2>
+          <ul>
+            <li><b>Volitiva:</b> Cristo y obediencia. <span>Filipenses 2:13; Jeremías 7:23.</span></li>
+            <li><b>Vertical:</b> la Palabra y la oración. <span>2 Timoteo 3:16-17; Jeremías 33:3.</span></li>
+            <li><b>Horizontal:</b> comunión y testimonio. <span>Efesios 4:16; Hechos 1:8.</span></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <div class="balance">
+      <b>Una vida equilibrada:</b> la rueda funciona como lista de comprobación. Desarrolla tus fortalezas, trabaja en tus deficiencias y confía en que el Espíritu Santo seguirá renovándote. <span>Hechos 2:42.</span>
+    </div>
+
+    <div class="tarea">
+      <h2><span class="n" style="background:var(--gold)">★</span>Tarea para la sesión 5</h2>
+      <ol>
+        <li><b>Memorización:</b> perfecciona los tres versículos y repásalos diariamente.</li>
+        <li><b>Lectura bíblica:</b> continúa leyendo y marcando; lee sobre los puntos sobresalientes.</li>
+        <li><b>Estudio bíblico:</b> completa «La Palabra».</li>
+        <li><b>Otras:</b> lee «Sugerencias prácticas en cuanto a la oración» y responde 1a, 1b, 1c, 4 y 5.</li>
+      </ol>
+    </div>
+
+    <footer>
+      <span>La Serie 2:7 — Creciendo firmes en la familia de Dios</span>
+      <span>Sesión 4</span>
+    </footer>
+  </div>
+</body>
+</html>

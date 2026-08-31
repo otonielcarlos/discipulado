@@ -91,6 +91,7 @@
   .bullets{list-style:none;display:flex;flex-direction:column;gap:14px}
   .bullets li{position:relative;padding-left:26px;font-size:18px;line-height:1.4;color:var(--ink)}
   .bullets li span{color:var(--ink-soft);font-size:16px}
+  .bullets li .verse{display:block;margin-top:4px;font-family:var(--serif);font-size:16px;line-height:1.3;font-style:italic}
   .bullets li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;background:var(--teal);transform:rotate(45deg)}
 
   .colcard{background:var(--paper-2);border:1px solid var(--line-soft);border-radius:14px;padding:30px 32px}
@@ -133,6 +134,10 @@
   /* ---------- refs row ---------- */
   .refs{display:flex;flex-wrap:wrap;gap:8px 10px;margin-top:14px}
   .refs .chip{font-family:var(--serif);font-size:14px;color:var(--teal);font-weight:600;background:var(--teal-wash);border:1px solid var(--line);border-radius:20px;padding:4px 12px}
+  .verse-refs{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;margin-top:18px}
+  .verse-ref{border-left:2px solid var(--teal);padding:7px 12px}
+  .verse-ref b{display:block;font-family:var(--serif);font-size:16px;color:var(--teal);margin-bottom:3px}
+  .verse-ref p{font-family:var(--serif);font-size:16px;line-height:1.34;font-style:italic;color:var(--ink-soft)}
 
   /* ---------- Wheel split ---------- */
   .split{display:grid;grid-template-columns:.95fr 1.05fr;gap:56px;align-items:center;margin-top:22px}
@@ -143,13 +148,16 @@
   .wheel .hub{font-family:var(--serif);font-size:16px;font-weight:600;fill:#F4F1E8}
 
   /* ---------- Dimensions ---------- */
-  .dims{display:flex;flex-direction:column;gap:15px;margin-top:26px}
+  .dims{display:flex;flex-direction:column;gap:10px;margin-top:22px}
   .dim{display:flex;gap:20px;align-items:flex-start;background:var(--paper-2);border:1px solid var(--line-soft);border-radius:12px;padding:18px 24px}
   .dim .dn{flex:none;font-family:var(--serif);font-size:26px;color:var(--teal);font-weight:600;line-height:1;width:26px;margin-top:2px}
   .dim .dh{font-size:20px;font-weight:600;color:var(--ink)}
   .dim .dh span{font-weight:400;color:var(--ink-soft);font-size:16px}
   .dim .dd{font-size:16px;color:var(--ink-soft);margin-top:5px;line-height:1.45}
   .dim .dd b{color:var(--teal);font-weight:600}
+  .dverses{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:7px}
+  .dverse b{display:block;font-family:var(--serif);font-size:16px;color:var(--teal);margin-bottom:2px}
+  .dverse p{font-family:var(--serif);font-size:16px;line-height:1.28;font-style:italic;color:var(--ink-soft)}
 
   /* closing */
   .closing{align-items:center;justify-content:center;text-align:center}
@@ -261,19 +269,19 @@
         <h1 class="title anim">Requisitos para orar</h1>
         <div class="grid anim" style="margin-top:32px">
           <ul class="bullets">
-            <li>No aferrarse al pecado <span>— Salmo 66:18</span></li>
-            <li>Pedir creyendo que se recibirá <span>— Mateo 21:22</span></li>
-            <li>Permanecer en Cristo y su Palabra <span>— Juan 15:7</span></li>
+            <li>No aferrarse al pecado <span>— Salmo 66:18</span><span class="verse">«Si no hubiera confesado el pecado de mi corazón, mi Señor no me habría escuchado.»</span></li>
+            <li>Pedir creyendo que se recibirá <span>— Mateo 21:22</span><span class="verse">«Ustedes pueden orar por cualquier cosa, y si tienen fe la recibirán.»</span></li>
+            <li>Permanecer en Cristo y su Palabra <span>— Juan 15:7</span><span class="verse">«Si ustedes permanecen en mí y mis palabras permanecen en ustedes, pueden pedir lo que quieran, ¡y les será concedido!»</span></li>
           </ul>
           <ul class="bullets">
-            <li>Pedir en el nombre de Jesús <span>— Juan 16:24</span></li>
-            <li>Pedir conforme a su voluntad <span>— 1 Juan 5:14-15</span></li>
-            <li>No pedir por interés propio <span>— Santiago 4:3</span></li>
+            <li>Pedir en el nombre de Jesús <span>— Juan 16:24</span><span class="verse">«No lo han hecho antes. Pidan en mi nombre y recibirán y tendrán alegría en abundancia.»</span></li>
+            <li>Pedir conforme a su voluntad <span>— 1 Juan 5:14-15</span><span class="verse">«Y estamos seguros de que él nos oye cada vez que le pedimos algo que le agrada; y como sabemos que él nos oye cuando le hacemos nuestras peticiones, también sabemos que nos dará lo que le pedimos.»</span></li>
+            <li>No pedir por interés propio <span>— Santiago 4:3</span><span class="verse">«Aun cuando se lo piden, tampoco lo reciben porque lo piden con malas intenciones: desean solamente lo que les dará placer.»</span></li>
           </ul>
         </div>
         <p class="note anim">Con esto en mente, veamos la segunda parte: el patrón de Cristo para orar.</p>
       </div>
-      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Requisitos</span></div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Requisitos · NTV</span></div>
     </section>
 
     <!-- 5 · ESCRITURA: MATEO 6 -->
@@ -333,14 +341,14 @@
             <li>Sus necesidades personales</li>
           </ul>
         </div>
-        <div class="refs anim">
-          <span class="chip">Romanos 10:1</span>
-          <span class="chip">1 Timoteo 2:1-4</span>
-          <span class="chip">Mateo 9:37-38</span>
-          <span class="chip">Efesios 3:14-21</span>
+        <div class="verse-refs anim">
+          <div class="verse-ref"><b>Romanos 10:1</b><p>«El profundo deseo de mi corazón y mi oración a Dios es que los israelitas lleguen a ser salvos.»</p></div>
+          <div class="verse-ref"><b>1 Timoteo 2:1-4</b><p>«Te ruego que ores por todos los seres humanos. Pídele a Dios que los ayude; intercede en su favor y da gracias por ellos.»</p></div>
+          <div class="verse-ref"><b>Mateo 9:37-38</b><p>«La cosecha es grande, pero los obreros son pocos. Así que oren al Señor […] pídanle que envíe más obreros a sus campos.»</p></div>
+          <div class="verse-ref"><b>Efesios 3:14-21</b><p>«Pido en oración que, de sus gloriosos e inagotables recursos, los fortalezca con poder en el ser interior por medio de su Espíritu.»</p></div>
         </div>
       </div>
-      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Interceder</span></div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Interceder · NTV</span></div>
     </section>
 
     <!-- 8 · FILIPENSES 4:6-7 -->
@@ -353,7 +361,7 @@
           <div class="item"><div class="num">·</div><div><div class="it-h">Qué debemos hacer</div><div class="it-s">No preocuparnos por nada; en todo, orar y dar gracias, y presentar nuestras peticiones a Dios.</div></div></div>
           <div class="item"><div class="num">·</div><div><div class="it-h">La promesa de Dios</div><div class="it-s">Su paz, que sobrepasa todo entendimiento, cuidará nuestro corazón y nuestra mente en Cristo Jesús.</div></div></div>
         </div>
-        <div class="callout anim" style="background:var(--gold)"><span class="tag">Para recordar</span><div>«Debemos orar aun cuando no tenemos ganas, porque sería peligroso descuidar algo tan bueno.» — <b>C. H. Spurgeon</b></div></div>
+        <div class="callout anim" style="background:var(--gold)"><span class="tag">Charles H. Spurgeon</span><div>«Debemos orar cuando tenemos ganas de hacerlo, porque sería pecaminoso descuidar una oportunidad tan buena. Debemos orar cuando no tenemos el estado de ánimo apropiado, porque sería peligroso seguir en semejante condición tan insalubre.»</div></div>
       </div>
       <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Sin ansiedad</span></div>
     </section>
@@ -382,7 +390,7 @@
             </ul>
           </div>
         </div>
-        <p class="note anim">«Pase bastante tiempo con Dios; deje ir otras cosas, pero no lo descuide a él.» — Oswald Chambers</p>
+        <p class="note anim">«Es imposible que un creyente, sin importar su experiencia, se mantenga bien con Dios si no se toma la molestia de pasar tiempo con Dios. […] Pase bastante tiempo con Dios; deje ir otras cosas, pero no lo descuide a él.» — Oswald Chambers</p>
       </div>
       <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Tiempo con Dios</span></div>
     </section>
@@ -442,12 +450,12 @@
         <div class="eyebrow anim">La rueda en profundidad</div>
         <h1 class="title anim">Las tres dimensiones</h1>
         <div class="dims">
-          <div class="dim anim"><div class="dn">1</div><div><div class="dh">Volitiva <span>· tu relación con tu voluntad</span></div><div class="dd">Centro: <b>Cristo</b> (Filipenses 2:13) · Borde: <b>la obediencia a Cristo</b> (Jeremías 7:23)</div></div></div>
-          <div class="dim anim"><div class="dn">2</div><div><div class="dh">Vertical <span>· tu relación con Dios</span></div><div class="dd">El radio de <b>la Palabra</b> (2 Timoteo 3:16-17) · El radio de <b>la oración</b> (Jeremías 33:3)</div></div></div>
-          <div class="dim anim"><div class="dn">3</div><div><div class="dh">Horizontal <span>· tu relación con otros</span></div><div class="dd">El radio de <b>la comunión</b> (Efesios 4:16) · El radio del <b>testimonio</b> (Hechos 1:8)</div></div></div>
+          <div class="dim anim"><div class="dn">1</div><div><div class="dh">Volitiva <span>· tu relación con tu voluntad</span></div><div class="dverses"><div class="dverse"><b>Cristo · Filipenses 2:13</b><p>«Dios trabaja en ustedes y les da el deseo y el poder para que hagan lo que a él le agrada.»</p></div><div class="dverse"><b>Obediencia · Jeremías 7:23</b><p>«Obedézcanme, y yo seré su Dios, y ustedes serán mi pueblo. ¡Hagan todo lo que les diga y les irá bien!»</p></div></div></div></div>
+          <div class="dim anim"><div class="dn">2</div><div><div class="dh">Vertical <span>· tu relación con Dios</span></div><div class="dverses"><div class="dverse"><b>La Palabra · 2 Timoteo 3:16-17</b><p>«Toda la Escritura es inspirada por Dios… Dios la usa para preparar y capacitar a su pueblo para que haga toda buena obra.»</p></div><div class="dverse"><b>La oración · Jeremías 33:3</b><p>«Pídeme y te daré a conocer secretos sorprendentes que no conoces acerca de lo que está por venir.»</p></div></div></div></div>
+          <div class="dim anim"><div class="dn">3</div><div><div class="dh">Horizontal <span>· tu relación con otros</span></div><div class="dverses"><div class="dverse"><b>Comunión · Efesios 4:16</b><p>«Cada parte […] ayuda a que las demás se desarrollen… todo el cuerpo crece y está sano y lleno de amor.»</p></div><div class="dverse"><b>Testimonio · Hechos 1:8</b><p>«Recibirán poder cuando el Espíritu Santo descienda sobre ustedes; y serán mis testigos… hasta los lugares más lejanos de la tierra.»</p></div></div></div></div>
         </div>
       </div>
-      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Tres dimensiones</span></div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Tres dimensiones · NTV</span></div>
     </section>
 
     <!-- 12 · LA COMBINACIÓN -->
@@ -457,7 +465,7 @@
         <div class="eyebrow anim">La rueda como un todo</div>
         <h1 class="title anim">Una vida equilibrada</h1>
         <p class="lead anim">No es «o esto o aquello», sino «tanto esto como aquello»: la Palabra y la oración, la comunión y el testimonio, girando en torno a Cristo.</p>
-        <div class="callout anim"><span class="tag">En la práctica</span><div>La rueda es una buena <b>lista de comprobación</b> para evaluar tu crecimiento.</div></div>
+        <div class="callout anim"><span class="tag">En la práctica</span><div>La rueda es una buena <b>lista de comprobación</b> para evaluar tu crecimiento. Desarrolle sus fortalezas y confíe en que Dios las usará al máximo. También, trabaje con sus deficiencias e ineptitudes, y confíe en el Espíritu Santo para que él siga renovándolo.</div></div>
         <p class="note anim">«Todos se dedicaban a las enseñanzas de los apóstoles, a la comunión, a las comidas y a la oración.» — Hechos 2:42</p>
       </div>
       <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Equilibrio</span></div>
