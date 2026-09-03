@@ -2,7 +2,7 @@
 
 > Documento maestro de referencia para las presentaciones del discipulado
 > **"La Serie 2:7 — Creciendo firmes en la familia de Dios"** (NavPress, Libro 1).
-> Aplica a **todas las sesiones**. Última actualización: junio 2026.
+> Aplica a **todas las sesiones**. Última actualización: septiembre 2026.
 
 ---
 
@@ -46,6 +46,7 @@ Ambos se entregan en **HTML**; el **PDF lo exporta el usuario** desde el navegad
 
 Principios:
 - **Un acento, no varios.** El teal manda; el dorado es un detalle ocasional.
+- **Títulos siempre en una sola línea.** Ningún título de diapositiva debe partirse; si es largo, se reduce su tamaño hasta que quepa completo.
 - **Poco texto por slide.** Título grande + 3–6 puntos. El resto lo dice el expositor.
 - **Legible al proyectar.** El texto debe verse bien en pantalla y por Zoom. Cuando hay poco contenido, **agranda la tipografía para llenar el espacio** en vez de dejar huecos. Tamaños mínimos de referencia para las presentaciones 16:9 (subir si sobra espacio):
   - Bullets / cuerpo: **≥ 21px** (detalle secundario ≥ 18px).
