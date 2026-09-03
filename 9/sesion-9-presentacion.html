@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Serie 2:7 · Sesión 9 — La obediencia</title>
+<link rel="icon" type="image/webp" href="../logo-2-7.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Libre+Franklin:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F2E9;--paper-2:#FBF8F1;--ink:#22282A;--ink-soft:#5A625F;--ink-faint:#8C938E;
+    --teal:#1E5B57;--teal-bright:#2E837B;--teal-wash:#E7EEEB;
+    --line:rgba(30,91,87,.20);--line-soft:rgba(34,40,42,.12);--gold:#B0894E;
+    --serif:'Spectral',Georgia,'Times New Roman',serif;--sans:'Libre Franklin',system-ui,-apple-system,sans-serif;
+    --W:1280px;--H:720px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{background:#1a1f1d;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow:hidden}
+  .viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+  .stage{width:var(--W);height:var(--H);position:relative;transform-origin:center center;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+  .slide{position:absolute;inset:0;width:var(--W);height:var(--H);background:var(--paper);background-image:radial-gradient(120% 90% at 88% 8%,rgba(46,131,123,.06),transparent 60%),radial-gradient(100% 80% at 6% 100%,rgba(176,137,78,.05),transparent 55%);padding:74px 92px 64px;display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .5s ease;overflow:hidden}
+  .slide.is-active{opacity:1;visibility:visible;z-index:2}
+  .slide::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E")}
+  .mark{font-family:var(--serif);font-weight:600;letter-spacing:.01em;color:var(--teal)}
+  .topbar{position:absolute;top:40px;left:92px;right:92px;display:flex;align-items:center;justify-content:space-between;z-index:3}
+  .topbar .series{font-size:12px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-faint)}
+  .topbar .mark{font-size:22px}
+  .footer{position:absolute;bottom:34px;left:92px;right:92px;display:flex;align-items:center;justify-content:space-between;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);z-index:3}
+  .eyebrow{font-size:14px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--teal-bright);display:flex;align-items:center;gap:14px;margin-bottom:16px}
+  .eyebrow::before{content:"";width:34px;height:2px;background:var(--teal);display:inline-block}
+  h1.title{font-family:var(--serif);font-weight:500;font-size:52px;line-height:1.06;letter-spacing:-.01em;color:var(--ink);max-width:none;white-space:nowrap}
+  .lead{font-size:23px;line-height:1.5;color:var(--ink-soft);margin-top:18px;max-width:56ch;font-weight:400}
+  .body{flex:1;display:flex;flex-direction:column;justify-content:center}
+  .body.top{justify-content:flex-start;padding-top:6px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px 52px;margin-top:28px}
+  .bullets{list-style:none;display:flex;flex-direction:column;gap:15px}
+  .bullets li{position:relative;padding-left:28px;font-size:22px;line-height:1.4;color:var(--ink)}
+  .bullets li span{color:var(--ink-soft);font-size:18px}
+  .bullets li::before{content:"";position:absolute;left:0;top:10px;width:11px;height:11px;background:var(--teal);transform:rotate(45deg)}
+  .colcard{background:var(--paper-2);border:1px solid var(--line-soft);border-radius:14px;padding:25px 30px}
+  .colcard h3{font-family:var(--serif);font-weight:600;font-size:25px;color:var(--teal);margin-bottom:12px}
+  .colcard p{font-size:19px;line-height:1.48;color:var(--ink-soft)}
+  .colcard .ref{display:block;margin-top:11px;font-family:var(--serif);font-weight:600;font-size:18px;color:var(--teal)}
+  .cover{justify-content:center;align-items:flex-start;padding:0 96px}
+  .cover .kicker{font-size:14px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--teal-bright)}
+  .cover .glyph{font-family:var(--serif);font-weight:600;font-size:150px;line-height:.9;color:var(--teal);letter-spacing:-.02em;margin:8px 0 6px -6px;position:relative}
+  .cover .glyph::after{content:"";display:block;width:120px;height:4px;background:var(--gold);margin-top:26px}
+  .cover h1{font-family:var(--serif);font-weight:500;font-size:60px;line-height:1.04;color:var(--ink);max-width:none;margin-top:30px;letter-spacing:-.015em;white-space:nowrap}
+  .cover .sess{display:flex;align-items:baseline;gap:16px;margin-top:30px}
+  .cover .sess b{font-family:var(--serif);font-weight:600;font-size:30px;color:var(--ink)}
+  .cover .sess span{font-size:15px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint)}
+  .cover .ref{position:absolute;bottom:64px;left:96px;font-style:italic;font-family:var(--serif);font-size:18px;color:var(--ink-soft)}
+  .cover .deco{position:absolute;top:0;right:0;width:300px;height:100%;background:linear-gradient(180deg,rgba(46,131,123,.10),rgba(30,91,87,.04));border-left:1px solid var(--line)}
+  .cover .deco::before{content:"2:7";position:absolute;bottom:48px;right:40px;font-family:var(--serif);font-size:90px;color:rgba(30,91,87,.10);font-weight:600}
+  .scripture{align-items:center;justify-content:center;text-align:center;padding:70px 130px}
+  .scripture .quote{font-family:var(--serif);font-weight:400;font-style:italic;font-size:40px;line-height:1.4;color:var(--ink);letter-spacing:-.005em;max-width:28ch}
+  .scripture .quote .em{color:var(--teal);font-style:italic;font-weight:500}
+  .scripture .attr{margin-top:34px;font-size:16px;letter-spacing:.28em;text-transform:uppercase;color:var(--teal-bright);font-weight:600}
+  .scripture .bigmark{position:absolute;top:60px;left:50%;transform:translateX(-50%);font-family:var(--serif);font-size:46px;color:var(--line);font-weight:600}
+  .vtable{margin-top:26px;border-top:1px solid var(--line)}
+  .vrow{display:flex;align-items:center;justify-content:space-between;padding:18px 6px;border-bottom:1px solid var(--line-soft)}
+  .vrow .g{display:flex;align-items:center;gap:18px}
+  .vrow .gn{font-family:var(--serif);font-size:20px;color:var(--teal-bright);font-weight:600;width:26px}
+  .vrow .gt{font-size:25px;color:var(--ink);font-weight:500}
+  .vrow .ref{font-family:var(--serif);font-size:23px;font-weight:600;color:var(--teal);letter-spacing:.01em}
+  .list{display:flex;flex-direction:column;gap:18px;margin-top:28px}
+  .item{display:flex;gap:22px;align-items:flex-start}
+  .num{flex:none;width:42px;height:42px;border-radius:50%;border:1.5px solid var(--teal);color:var(--teal);font-family:var(--serif);font-weight:600;font-size:20px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .item .it-h{font-size:23px;font-weight:600;color:var(--ink);line-height:1.25}
+  .item .it-s{font-size:18px;color:var(--ink-soft);line-height:1.45;margin-top:4px;max-width:76ch}
+  .callout{margin-top:24px;background:var(--teal);color:#F4F1E8;border-radius:12px;padding:18px 26px;font-size:20px;line-height:1.4;display:flex;align-items:center;gap:16px}
+  .callout b{color:#fff}.callout .tag{flex:none;font-size:12px;letter-spacing:.2em;text-transform:uppercase;background:rgba(255,255,255,.16);padding:6px 12px;border-radius:20px;font-weight:600}
+  .note{margin-top:22px;font-size:19px;color:var(--ink-soft);font-style:italic;font-family:var(--serif);padding-left:18px;border-left:2px solid var(--teal);max-width:80ch}
+  .path{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:34px;position:relative}
+  .path::before{content:"";position:absolute;top:34px;left:11%;right:11%;height:2px;background:var(--line);z-index:0}
+  .step{position:relative;z-index:1;text-align:center}
+  .step .dot{width:68px;height:68px;border-radius:50%;margin:0 auto 17px;background:var(--paper);border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:26px;font-weight:600;color:var(--teal)}
+  .step h3{font-family:var(--serif);font-size:24px;color:var(--ink);font-weight:600}
+  .step p{font-size:16px;line-height:1.4;color:var(--ink-soft);margin-top:7px}
+  .obedience-diagram{width:100%;height:390px;margin-top:4px;overflow:visible}
+  .obedience-diagram .structure{fill:none;stroke:var(--teal);stroke-width:2.2}
+  .obedience-diagram .route{fill:none;stroke:var(--teal-bright);stroke-width:13;stroke-linecap:round}
+  .obedience-diagram .label{font:600 21px var(--sans);fill:var(--ink)}
+  .obedience-diagram .copy{font:20px var(--sans);fill:var(--ink-soft)}
+  .obedience-diagram .sign{font:19px var(--sans);fill:var(--ink)}
+  .closing{align-items:center;justify-content:center;text-align:center}
+  .closing .glyph{font-family:var(--serif);font-size:70px;color:var(--teal);font-weight:600;line-height:1}
+  .closing h1{font-family:var(--serif);font-weight:500;font-size:46px;color:var(--ink);margin-top:18px;max-width:none;white-space:nowrap}
+  .closing p{margin-top:18px;font-size:20px;color:var(--ink-soft);font-style:italic;font-family:var(--serif);max-width:44ch}
+  .closing .rule{width:90px;height:3px;background:var(--gold);margin:30px auto 0}
+  .slide.is-active .anim{animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
+  .slide.is-active .anim:nth-child(1){animation-delay:.05s}.slide.is-active .anim:nth-child(2){animation-delay:.13s}.slide.is-active .anim:nth-child(3){animation-delay:.21s}.slide.is-active .anim:nth-child(4){animation-delay:.29s}.slide.is-active .anim:nth-child(5){animation-delay:.37s}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .controls{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:50;background:rgba(20,26,24,.72);backdrop-filter:blur(8px);padding:8px 10px;border-radius:40px;border:1px solid rgba(255,255,255,.08);opacity:.25;transition:opacity .3s}
+  .controls:hover{opacity:1}.controls button{width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;background:rgba(255,255,255,.10);color:#F4F1E8;font-size:17px;display:flex;align-items:center;justify-content:center;transition:background .2s}.controls button:hover{background:var(--teal-bright)}
+  .controls .count{color:#E7E2D6;font-size:13px;letter-spacing:.12em;min-width:54px;text-align:center;font-variant-numeric:tabular-nums}
+  .progress{position:fixed;top:0;left:0;height:3px;background:var(--teal-bright);z-index:60;transition:width .4s ease}
+  .hint{position:fixed;bottom:26px;right:24px;color:rgba(255,255,255,.32);font-size:11px;letter-spacing:.1em;z-index:50}
+  @media print{@page{size:13.333in 7.5in;margin:0}html,body{height:auto;overflow:visible;background:#fff}.viewport{position:static;display:block}.stage{width:auto;height:auto;transform:none!important;box-shadow:none}.slide{position:relative;inset:auto;opacity:1!important;visibility:visible!important;page-break-after:always;break-after:page;box-shadow:none}.slide:last-child{page-break-after:auto}.slide .anim{animation:none!important}.controls,.hint,.progress{display:none!important}.slide::after{opacity:.45}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="viewport">
+  <div class="stage" id="stage">
+    <!-- 1 · PORTADA -->
+    <section class="slide cover is-active">
+      <div class="deco"></div><div class="kicker anim">La Serie 2:7</div><div class="glyph anim">2:7</div>
+      <h1 class="anim">La obediencia</h1><div class="sess anim"><b>Sesión 9</b><span>Discipulado</span></div>
+      <div class="ref">«Si ustedes me aman, obedecerán mis mandamientos.» — Juan 14:15</div>
+    </section>
+
+    <!-- 2 · BOSQUEJO -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 9</span><span class="mark">2:7</span></div>
+      <div class="body top"><div class="eyebrow anim">Bosquejo de esta sesión</div><h1 class="title anim">Lo que veremos hoy</h1>
+        <div class="grid anim"><ul class="bullets"><li>Abrir en oración</li><li>Repasar las cinco Garantías</li><li>Compartir puntos de la lectura</li><li>Estudiar «La obediencia»</li></ul><ul class="bullets"><li>Revisar el listado de oración</li><li>Tarea para la sesión 10</li><li>Oración conversacional</li></ul></div>
+      </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Bosquejo</span></div>
+    </section>
+
+    <!-- 3 · CINCO GARANTÍAS -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 9</span><span class="mark">2:7</span></div>
+      <div class="body top"><div class="eyebrow anim">Repaso de memoria</div><h1 class="title anim" style="font-size:46px">Las cinco «Garantías»</h1>
+        <div class="vtable anim" style="margin-top:20px"><div class="vrow" style="padding:13px 6px"><div class="g"><span class="gn">1</span><span class="gt">Salvación</span></div><span class="ref">1 Juan 5:11-12</span></div><div class="vrow" style="padding:13px 6px"><div class="g"><span class="gn">2</span><span class="gt">Oración respondida</span></div><span class="ref">Juan 16:24</span></div><div class="vrow" style="padding:13px 6px"><div class="g"><span class="gn">3</span><span class="gt">Victoria</span></div><span class="ref">1 Corintios 10:13</span></div><div class="vrow" style="padding:13px 6px"><div class="g"><span class="gn">4</span><span class="gt">Perdón</span></div><span class="ref">1 Juan 1:9</span></div><div class="vrow" style="padding:13px 6px"><div class="g"><span class="gn">5</span><span class="gt">Guía</span></div><span class="ref">Proverbios 3:5-6</span></div></div>
+      </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Memorización</span></div>
+    </section>
+
+    <!-- 4 · COMPARTIR -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 9</span><span class="mark">2:7</span></div>
+      <div class="body"><div class="eyebrow anim">Compartir en grupo</div><h1 class="title anim">Lo que Dios está haciendo</h1>
+        <div class="grid anim"><div class="colcard"><h3>Mi lectura</h3><p>Comparta un punto sobresaliente de su lectura bíblica y cómo le habló Dios.</p></div><div class="colcard"><h3>Mi listado de oración</h3><p>¿Por quién está orando? ¿Qué oportunidad o respuesta ha visto esta semana?</p></div><div class="colcard"><h3>Mi obediencia</h3><p>¿En qué área concreta le está invitando Dios a responder?</p></div><div class="colcard"><h3>Mi siguiente paso</h3><p>Exprese una decisión específica, sencilla y verificable.</p></div></div>
+      </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Compartir</span></div>
+    </section>
+
+    <!-- 5 · INTRODUCCIÓN -->
+    <section class="slide scripture">
+      <div class="bigmark">2:7</div><div class="quote anim">Cristo nos llamó a una vida de <span class="em">obediencia</span>, y su Espíritu nos capacita para vivir de acuerdo con la Palabra de Dios.</div><div class="attr anim">Romanos 8:2</div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>La obediencia</span></div>
+    </section>
+
+    <!-- 6 · BASES -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 9</span><span class="mark">2:7</span></div>
+      <div class="body top"><div class="eyebrow anim">Las bases de la obediencia</div><h1 class="title anim">Amar a Dios es obedecerle</h1>
+        <div class="grid anim"><div class="colcard"><h3>La Palabra</h3><p>La Biblia es nuestro modelo y manual. Obedecer su Palabra es obedecer a Dios mismo.</p></div><div class="colcard"><h3>El amor</h3><p>La obediencia no compra el amor de Dios; es la respuesta de quien ya le ama.</p><span class="ref">Juan 14:15, 21</span></div></div>
+        <div class="callout anim"><span class="tag">Para pensar</span><div>¿Qué revela mi obediencia acerca de mi amor y confianza en Dios?</div></div>
+      </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Las bases</span></div>
+    </section>
+
+    <!-- 7 · DIOS PIDE -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 9</span><span class="mark">2:7</span></div>
+      <div class="body"><div class="eyebrow anim">Deuteronomio 10:12-13</div><h1 class="title anim">¿Qué pide Dios de nosotros?</h1>
+        <div class="list anim"><div class="item"><div class="num">1</div><div><div class="it-h">Temer al Señor</div><div class="it-s">Reconocer quién es Dios y darle el lugar que le corresponde.</div></div></div><div class="item"><div class="num">2</div><div><div class="it-h">Andar en sus caminos y amarle</div><div class="it-s">Orientar toda la vida hacia una relación fiel con él.</div></div></div><div class="item"><div class="num">3</div><div><div class="it-h">Servir y guardar sus mandamientos</div><div class="it-s">Responder con todo el corazón, para nuestro propio bien.</div></div></div></div>
+      </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Deuteronomio 10:12-13</span></div>
+    </section>
+
+    <!-- 8 · CUATRO ÁREAS -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 9</span><span class="mark">2:7</span></div>
+      <div class="body"><div class="eyebrow anim">La práctica de la vida obediente</div><h1 class="title anim">Cuatro realidades del camino</h1>
+        <div class="path anim"><div class="step"><div class="dot">1</div><h3>Tentación</h3><p>La invitación a apartarnos de la voluntad de Dios.</p></div><div class="step"><div class="dot">2</div><h3>Pecado</h3><p>Ceder y elegir nuestro camino en lugar del suyo.</p></div><div class="step"><div class="dot">3</div><h3>Confesión</h3><p>Reconocer sinceramente el pecado delante de Dios.</p></div><div class="step"><div class="dot">4</div><h3>Victoria</h3><p>Apropiarnos de la provisión de Dios y obedecer.</p></div></div>
+      </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>La vida obediente</span></div>
+    </section>
+
+    <!-- 9 · TENTACIÓN -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 9</span><span class="mark">2:7</span></div>
+      <div class="body top"><div class="eyebrow anim">Comprender la tentación</div><h1 class="title anim">¿De dónde viene?</h1>
+        <div class="grid anim"><div class="colcard"><h3>El tentador</h3><p>Satanás tentó a Jesús y busca desviarnos de la voluntad de Dios.</p><span class="ref">Mateo 4:1-3</span></div><div class="colcard"><h3>No viene de Dios</h3><p>Dios no puede ser tentado por el mal ni tienta a nadie.</p><span class="ref">Santiago 1:13</span></div><div class="colcard" style="grid-column:1 / -1"><h3>Nuestros deseos</h3><p>Cada persona es atraída y seducida por sus propios malos deseos. Reconocerlos nos ayuda a buscar el camino de escape.</p><span class="ref">Santiago 1:14 · 1 Corintios 10:13</span></div></div>
+      </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Tentación</span></div>
+    </section>
+
+    <!-- 10 · PECADO -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 9</span><span class="mark">2:7</span></div>
+      <div class="body"><div class="eyebrow anim">Una distinción importante</div><h1 class="title anim">Tentación no es lo mismo que pecado</h1>
+        <div class="grid anim"><div class="colcard"><h3>Tentación</h3><p>Es la presión o el deseo de desobedecer. Ser tentado no significa que ya hemos pecado.</p></div><div class="colcard"><h3>Pecado</h3><p>Es elegir nuestro propio camino, dejar de hacer el bien que conocemos o quebrantar la voluntad de Dios.</p><span class="ref">Isaías 53:6 · Santiago 4:17 · 1 Juan 3:4</span></div></div>
+        <div class="note anim">La tentación presenta una decisión; la obediencia responde confiando en la provisión de Dios.</div>
+      </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Tentación y pecado</span></div>
+    </section>
+
+    <!-- 11 · COMUNIÓN -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 9</span><span class="mark">2:7</span></div>
+      <div class="body top"><div class="eyebrow anim">Caminar cerca de Dios</div><h1 class="title anim">El camino de la obediencia</h1>
+        <svg class="obedience-diagram anim" viewBox="0 0 1000 390" role="img" aria-labelledby="diagram-title diagram-desc">
+          <title id="diagram-title">Tentación, pecado, confesión y victoria</title>
+          <desc id="diagram-desc">La tentación ofrece un camino de escape hacia la victoria. El pecado quebranta la comunión con Dios y la confesión la restaura.</desc>
+          <defs>
+            <marker id="arrow-thin" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="23" markerHeight="23" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--teal-bright)"/></marker>
+            <marker id="arrow-thick" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="31" markerHeight="31" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--teal-bright)"/></marker>
+            <path id="confession-label-path" d="M410 318C376 280 378 230 418 198"/>
+            <path id="sin-label-path" d="M582 198C624 230 626 280 590 318"/>
+          </defs>
+
+          <rect class="structure" x="365" y="0" width="270" height="88" rx="10"/>
+          <path class="structure" d="M395 88v37h18V88M587 88v37h18V88"/>
+          <text class="sign" x="385" y="30">Camino de escape</text>
+          <path class="route" d="M558 24h48" marker-end="url(#arrow-thin)"/>
+          <text class="sign" x="425" y="66">Tentación</text>
+          <path class="route" d="M535 60h45v25" marker-end="url(#arrow-thin)"/>
+
+          <path class="structure" d="M65 140h870M65 180h870"/>
+          <text class="label" x="82" y="169">Comunión con Dios</text>
+          <path class="route" d="M286 162h414" marker-end="url(#arrow-thick)"/>
+          <text class="label" x="725" y="169">La victoria</text>
+
+          <path class="structure" d="M455 182C380 218 378 300 452 330L395 390M545 182C620 218 622 300 548 330L505 390"/>
+          <circle class="structure" cx="500" cy="255" r="61"/>
+          <path class="route" d="M548 210C588 238 590 286 552 312" marker-end="url(#arrow-thick)"/>
+          <path class="route" d="M448 312C412 283 413 238 452 211" marker-end="url(#arrow-thick)"/>
+          <text class="label"><textPath href="#sin-label-path" startOffset="7%">Pecado</textPath></text>
+          <text class="label"><textPath href="#confession-label-path" startOffset="3%">Confesión</textPath></text>
+
+          <text class="copy" x="72" y="230"><tspan x="72" dy="0">La confesión:</tspan><tspan x="72" dy="27">restaura la</tspan><tspan x="72" dy="27">comunión con Dios</tspan></text>
+          <text class="copy" x="660" y="230"><tspan x="660" dy="0">El pecado:</tspan><tspan x="660" dy="27">quebranta la</tspan><tspan x="660" dy="27">comunión con Dios</tspan></text>
+        </svg>
+      </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Comunión con Dios</span></div>
+    </section>
+
+    <!-- 12 · CONFESIÓN -->
+    <section class="slide scripture">
+      <div class="bigmark">2:7</div><div class="quote anim">«Te confesé mi pecado y no te oculté mi maldad… <span class="em">y tú perdonaste</span> mi culpa.»</div><div class="attr anim">Salmo 32:5</div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Confesión</span></div>
+    </section>
+
+    <!-- 13 · VICTORIA -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 9</span><span class="mark">2:7</span></div>
+      <div class="body"><div class="eyebrow anim">Romanos 6:11-14</div><h1 class="title anim">Vivir desde la victoria de Cristo</h1>
+        <div class="list anim"><div class="item"><div class="num">1</div><div><div class="it-h">Considérense vivos para Dios</div><div class="it-s">Nuestra identidad está unida a Cristo, no al dominio del pecado.</div></div></div><div class="item"><div class="num">2</div><div><div class="it-h">Preséntense a Dios</div><div class="it-s">Ofrezcan cada parte de su vida como instrumento de justicia.</div></div></div><div class="item"><div class="num">3</div><div><div class="it-h">No permitan que reine el pecado</div><div class="it-s">La promesa es que el pecado no tendrá dominio sobre ustedes.</div></div></div></div>
+      </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Victoria</span></div>
+    </section>
+
+    <!-- 14 · DOS PASOS -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 9</span><span class="mark">2:7</span></div>
+      <div class="body"><div class="eyebrow anim">Santiago 4:7</div><h1 class="title anim">Dos pasos de obediencia</h1>
+        <div class="grid anim"><div class="colcard"><h3>1 · Sométanse a Dios</h3><p>Rindan su voluntad, reciban su verdad y elijan caminar bajo su dirección.</p></div><div class="colcard"><h3>2 · Resistan al diablo</h3><p>Rechacen la tentación y permanezcan firmes en lo que Dios ha dicho.</p></div></div>
+        <div class="callout anim"><span class="tag">Gálatas 5:16</span><div><b>Vivan por el Espíritu</b>, y no seguirán los deseos de la naturaleza pecaminosa.</div></div>
+      </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Sométanse y resistan</span></div>
+    </section>
+
+    <!-- 15 · RESUMEN -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 9</span><span class="mark">2:7</span></div>
+      <div class="body"><div class="eyebrow anim">Resumen</div><h1 class="title anim">Una vida de obediencia</h1>
+        <div class="grid anim"><div class="colcard"><h3>Responde al amor de Dios</h3><p>Obedecemos las enseñanzas de la Biblia porque amamos y confiamos en Dios.</p></div><div class="colcard"><h3>Depende de su provisión</h3><p>No somos inmunes a la tentación, pero tampoco tenemos que ser sus víctimas.</p></div><div class="colcard"><h3>Confiesa con sinceridad</h3><p>El pecado rompe la comunión; la confesión la restaura.</p></div><div class="colcard"><h3>Camina por el Espíritu</h3><p>Dios nos capacita para elegir lo recto y permanecer cerca de él.</p></div></div>
+      </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Resumen</span></div>
+    </section>
+
+    <!-- 16 · TAREA -->
+    <section class="slide">
+      <div class="topbar"><span class="series">La Serie 2:7 · Sesión 9</span><span class="mark">2:7</span></div>
+      <div class="body top"><div class="eyebrow anim">Para la próxima semana</div><h1 class="title anim">Tarea para la sesión 10</h1>
+        <div class="list anim" style="gap:15px;margin-top:22px"><div class="item"><div class="num">1</div><div><div class="it-h">Memorización de las Escrituras</div><div class="it-s">Repase diariamente los versículos de Comenzando con Cristo. Continúe Juan 5:24 si lo está memorizando.</div></div></div><div class="item"><div class="num">2</div><div><div class="it-h">Tiempo a solas</div><div class="it-s">Siga leyendo, marcando su Biblia y anotando sus puntos sobresalientes.</div></div></div><div class="item"><div class="num">3</div><div><div class="it-h">Estudio bíblico</div><div class="it-s">Complete «La comunión», páginas 93-98.</div></div></div><div class="item"><div class="num">4</div><div><div class="it-h">Otras tareas</div><div class="it-s">Termine lo que todavía necesite firma en su registro de tareas completadas.</div></div></div></div>
+      </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Tarea</span></div>
+    </section>
+
+    <!-- 17 · CIERRE -->
+    <section class="slide closing">
+      <div class="glyph anim">2:7</div><h1 class="anim">Hablemos con Dios</h1><p class="anim">Oremos brevemente, un tema a la vez, respondiendo con sinceridad a lo que Dios nos mostró hoy.</p><div class="rule anim"></div>
+      <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Sesión 9</span></div>
+    </section>
+  </div>
+</div>
+<div class="controls"><button id="prev" aria-label="Anterior">←</button><div class="count"><span id="current">1</span> / <span id="total">17</span></div><button id="next" aria-label="Siguiente">→</button></div>
+<div class="hint">← → · F pantalla completa</div>
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  const stage=document.getElementById('stage');
+  const currentEl=document.getElementById('current');
+  const totalEl=document.getElementById('total');
+  const progress=document.getElementById('progress');
+  let current=0;
+  totalEl.textContent=slides.length;
+  function show(n){current=(n+slides.length)%slides.length;slides.forEach((s,i)=>s.classList.toggle('is-active',i===current));currentEl.textContent=current+1;progress.style.width=((current+1)/slides.length*100)+'%';}
+  function scale(){const s=Math.min(window.innerWidth/1280,window.innerHeight/720);stage.style.transform=`scale(${s})`;}
+  document.getElementById('prev').addEventListener('click',()=>show(current-1));
+  document.getElementById('next').addEventListener('click',()=>show(current+1));
+  document.addEventListener('keydown',e=>{if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){e.preventDefault();show(current+1)}else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}else if(e.key.toLowerCase()==='f'){document.documentElement.requestFullscreen?.()}});
+  window.addEventListener('resize',scale);scale();show(0);
+</script>
+</body>
+</html>
