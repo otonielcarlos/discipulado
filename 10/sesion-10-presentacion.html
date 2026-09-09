@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Serie 2:7 · Sesión 10 — La comunión</title>
+<link rel="icon" type="image/webp" href="../logo-2-7.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Libre+Franklin:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F2E9;--paper-2:#FBF8F1;--ink:#22282A;--ink-soft:#5A625F;--ink-faint:#8C938E;
+    --teal:#1E5B57;--teal-bright:#2E837B;--teal-wash:#E7EEEB;
+    --line:rgba(30,91,87,.20);--line-soft:rgba(34,40,42,.12);--gold:#B0894E;
+    --serif:'Spectral',Georgia,'Times New Roman',serif;--sans:'Libre Franklin',system-ui,-apple-system,sans-serif;
+    --W:1280px;--H:720px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{background:#1a1f1d;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow:hidden}
+  .viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+  .stage{width:var(--W);height:var(--H);position:relative;transform-origin:center center;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+  .slide{position:absolute;inset:0;width:var(--W);height:var(--H);background:var(--paper);background-image:radial-gradient(120% 90% at 88% 8%,rgba(46,131,123,.06),transparent 60%),radial-gradient(100% 80% at 6% 100%,rgba(176,137,78,.05),transparent 55%);padding:74px 92px 64px;display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .5s ease;overflow:hidden}
+  .slide.is-active{opacity:1;visibility:visible;z-index:2}
+  .slide::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E")}
+  .mark{font-family:var(--serif);font-weight:600;letter-spacing:.01em;color:var(--teal)}
+  .topbar{position:absolute;top:40px;left:92px;right:92px;display:flex;align-items:center;justify-content:space-between;z-index:3}
+  .topbar .series{font-size:12px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-faint)}
+  .topbar .mark{font-size:22px}
+  .footer{position:absolute;bottom:34px;left:92px;right:92px;display:flex;align-items:center;justify-content:space-between;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);z-index:3}
+  .eyebrow{font-size:14px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--teal-bright);display:flex;align-items:center;gap:14px;margin-bottom:16px}
+  .eyebrow::before{content:"";width:34px;height:2px;background:var(--teal);display:inline-block}
+  h1.title{font-family:var(--serif);font-weight:500;font-size:52px;line-height:1.06;letter-spacing:-.01em;color:var(--ink);max-width:none;white-space:nowrap}
+  .lead{font-size:23px;line-height:1.5;color:var(--ink-soft);margin-top:18px;max-width:56ch;font-weight:400}
+  .body{flex:1;display:flex;flex-direction:column;justify-content:center}
+  .body.top{justify-content:flex-start;padding-top:6px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px 52px;margin-top:28px}
+  .bullets{list-style:none;display:flex;flex-direction:column;gap:15px}
+  .bullets li{position:relative;padding-left:28px;font-size:22px;line-height:1.4;color:var(--ink)}
+  .bullets li span{color:var(--ink-soft);font-size:18px}
+  .bullets li::before{content:"";position:absolute;left:0;top:10px;width:11px;height:11px;background:var(--teal);transform:rotate(45deg)}
+  .colcard{background:var(--paper-2);border:1px solid var(--line-soft);border-radius:14px;padding:25px 30px}
+  .colcard h3{font-family:var(--serif);font-weight:600;font-size:25px;color:var(--teal);margin-bottom:12px}
+  .colcard p{font-size:20px;line-height:1.48;color:var(--ink-soft)}
+  .colcard .ref{display:block;margin-top:11px;font-family:var(--serif);font-weight:600;font-size:18px;color:var(--teal)}
+  .cover{justify-content:center;align-items:flex-start;padding:0 96px}
+  .cover .kicker{font-size:14px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--teal-bright)}
+  .cover .glyph{font-family:var(--serif);font-weight:600;font-size:150px;line-height:.9;color:var(--teal);letter-spacing:-.02em;margin:8px 0 6px -6px;position:relative}
+  .cover .glyph::after{content:"";display:block;width:120px;height:4px;background:var(--gold);margin-top:26px}
+  .cover h1{font-family:var(--serif);font-weight:500;font-size:60px;line-height:1.04;color:var(--ink);max-width:none;margin-top:30px;letter-spacing:-.015em;white-space:nowrap}
+  .cover .sess{display:flex;align-items:baseline;gap:16px;margin-top:30px}
+  .cover .sess b{font-family:var(--serif);font-weight:600;font-size:30px;color:var(--ink)}
+  .cover .sess span{font-size:15px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint)}
+  .cover .ref{position:absolute;bottom:64px;left:96px;font-style:italic;font-family:var(--serif);font-size:18px;color:var(--ink-soft);max-width:57ch}
+  .cover .deco{position:absolute;top:0;right:0;width:300px;height:100%;background:linear-gradient(180deg,rgba(46,131,123,.10),rgba(30,91,87,.04));border-left:1px solid var(--line)}
+  .cover .deco::before{content:"2:7";position:absolute;bottom:48px;right:40px;font-family:var(--serif);font-size:90px;color:rgba(30,91,87,.10);font-weight:600}
+  .scripture{align-items:center;justify-content:center;text-align:center;padding:70px 130px}
+  .scripture .quote{font-family:var(--serif);font-weight:400;font-style:italic;font-size:42px;line-height:1.38;color:var(--ink);letter-spacing:-.005em;max-width:26ch}
+  .scripture .quote .em{color:var(--teal);font-style:italic;font-weight:500}
+  .scripture .attr{margin-top:34px;font-size:16px;letter-spacing:.28em;text-transform:uppercase;color:var(--teal-bright);font-weight:600}
+  .scripture .bigmark{position:absolute;top:60px;left:50%;transform:translateX(-50%);font-family:var(--serif);font-size:46px;color:var(--line);font-weight:600}
+  .list{display:flex;flex-direction:column;gap:18px;margin-top:28px}
+  .item{display:flex;gap:22px;align-items:flex-start}
+  .num{flex:none;width:42px;height:42px;border-radius:50%;border:1.5px solid var(--teal);color:var(--teal);font-family:var(--serif);font-weight:600;font-size:20px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .item .it-h{font-size:24px;font-weight:600;color:var(--ink);line-height:1.25}
+  .item .it-s{font-size:20px;color:var(--ink-soft);line-height:1.45;margin-top:4px;max-width:72ch}
+  .callout{margin-top:24px;background:var(--teal);color:#F4F1E8;border-radius:12px;padding:18px 26px;font-size:20px;line-height:1.4;display:flex;align-items:center;gap:16px}
+  .callout b{color:#fff}.callout .tag{flex:none;font-size:12px;letter-spacing:.2em;text-transform:uppercase;background:rgba(255,255,255,.16);padding:6px 12px;border-radius:20px;font-weight:600}
+  .note{margin-top:22px;font-size:19px;color:var(--ink-soft);font-style:italic;font-family:var(--serif);padding-left:18px;border-left:2px solid var(--teal);max-width:80ch}
+  .vtable{margin-top:24px;border-top:1px solid var(--line)}
+  .vrow{display:flex;align-items:center;justify-content:space-between;padding:14px 6px;border-bottom:1px solid var(--line-soft)}
+  .vrow .gt{font-size:23px;color:var(--ink);font-weight:500}
+  .vrow .ref{font-family:var(--serif);font-size:21px;font-weight:600;color:var(--teal);letter-spacing:.01em;white-space:nowrap}
+  .closing{align-items:center;justify-content:center;text-align:center}
+  .closing .glyph{font-family:var(--serif);font-size:70px;color:var(--teal);font-weight:600;line-height:1}
+  .closing h1{font-family:var(--serif);font-weight:500;font-size:46px;color:var(--ink);margin-top:18px;max-width:none;white-space:nowrap}
+  .closing p{margin-top:18px;font-size:20px;color:var(--ink-soft);font-style:italic;font-family:var(--serif);max-width:46ch}
+  .closing .rule{width:90px;height:3px;background:var(--gold);margin:30px auto 0}
+  .slide.is-active .anim{animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
+  .slide.is-active .anim:nth-child(1){animation-delay:.05s}.slide.is-active .anim:nth-child(2){animation-delay:.13s}.slide.is-active .anim:nth-child(3){animation-delay:.21s}.slide.is-active .anim:nth-child(4){animation-delay:.29s}.slide.is-active .anim:nth-child(5){animation-delay:.37s}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .controls{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:50;background:rgba(20,26,24,.72);backdrop-filter:blur(8px);padding:8px 10px;border-radius:40px;border:1px solid rgba(255,255,255,.08);opacity:.25;transition:opacity .3s}
+  .controls:hover{opacity:1}.controls button{width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;background:rgba(255,255,255,.10);color:#F4F1E8;font-size:17px;display:flex;align-items:center;justify-content:center;transition:background .2s}.controls button:hover{background:var(--teal-bright)}
+  .controls .count{color:#E7E2D6;font-size:13px;letter-spacing:.12em;min-width:54px;text-align:center;font-variant-numeric:tabular-nums}
+  .progress{position:fixed;top:0;left:0;height:3px;background:var(--teal-bright);z-index:60;transition:width .4s ease}
+  .hint{position:fixed;bottom:26px;right:24px;color:rgba(255,255,255,.32);font-size:11px;letter-spacing:.1em;z-index:50}
+  @media print{@page{size:13.333in 7.5in;margin:0}html,body{height:auto;overflow:visible;background:#fff}.viewport{position:static;display:block}.stage{width:auto;height:auto;transform:none!important;box-shadow:none}.slide{position:relative;inset:auto;opacity:1!important;visibility:visible!important;page-break-after:always;break-after:page;box-shadow:none}.slide:last-child{page-break-after:auto}.slide .anim{animation:none!important}.controls,.hint,.progress{display:none!important}.slide::after{opacity:.45}}
+</style>
+</head>
+<body>
+<!-- Fuente de contenido: PDF suministrado por el usuario, páginas 93-99. -->
+<div class="progress" id="progress"></div>
+<div class="viewport"><div class="stage" id="stage">
+  <!-- 1 · PORTADA -->
+  <section class="slide cover is-active">
+    <div class="deco"></div><div class="kicker anim">La Serie 2:7</div><div class="glyph anim">2:7</div>
+    <h1 class="anim">La comunión</h1><div class="sess anim"><b>Sesión 10</b><span>Discipulado</span></div>
+    <div class="ref">«Nosotros somos las diversas partes de un solo cuerpo y nos pertenecemos unos a otros.» — Romanos 12:5</div>
+  </section>
+
+  <!-- 2 · BOSQUEJO -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 10</span><span class="mark">2:7</span></div>
+    <div class="body top"><div class="eyebrow anim">Bosquejo de esta sesión</div><h1 class="title anim">Lo que veremos hoy</h1>
+      <div class="grid anim"><ul class="bullets"><li>Iniciar con oración</li><li>Repasar los versículos memorizados</li><li>Compartir puntos de la lectura</li></ul><ul class="bullets"><li>Estudiar «La comunión»</li><li>Revisar la tarea para la sesión 11</li><li>Oración conversacional</li></ul></div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Bosquejo</span></div>
+  </section>
+
+  <!-- 3 · REPASO -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 10</span><span class="mark">2:7</span></div>
+    <div class="body"><div class="eyebrow anim">Compartir en grupo</div><h1 class="title anim">Crecer juntos empieza al compartir</h1>
+      <div class="list anim"><div class="item"><div class="num">1</div><div><div class="it-h">La Palabra guardada</div><div class="it-s">Citen en grupos pequeños todos los versículos que han aprendido de memoria.</div></div></div><div class="item"><div class="num">2</div><div><div class="it-h">La Palabra vivida</div><div class="it-s">Compartan un punto sobresaliente de su lectura y cómo Dios lo aplicó a su vida.</div></div></div><div class="item"><div class="num">3</div><div><div class="it-h">La oración respondida</div><div class="it-s">Celebren avances y necesidades de las personas por quienes están orando.</div></div></div></div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Compartir</span></div>
+  </section>
+
+  <!-- 4 · CUERPO DE CRISTO -->
+  <section class="slide scripture">
+    <div class="bigmark">2:7</div><div class="quote anim">Juntos somos el <span class="em">cuerpo de Cristo</span>; cada uno forma una parte necesaria de él.</div><div class="attr anim">1 Corintios 12:27</div>
+    <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>La comunión</span></div>
+  </section>
+
+  <!-- 5 · PARA PENSAR -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 10</span><span class="mark">2:7</span></div>
+    <div class="body"><div class="eyebrow anim">Para pensar</div><h1 class="title anim">¿Toda convivencia es comunión?</h1>
+      <div class="grid anim"><div class="colcard"><h3>Conversar juntos</h3><p>Compartir café, noticias, tecnología, anécdotas y planes puede ser agradable y fortalecer una amistad.</p></div><div class="colcard"><h3>Compartir la vida</h3><p>La comunión cristiana añade propósito espiritual: dar, recibir, animar, corregir, orar y crecer en Cristo.</p></div></div>
+      <div class="callout anim"><span class="tag">Conversemos</span><div>¿Qué podría transformar una reunión agradable en verdadera comunión bíblica?</div></div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Para pensar</span></div>
+  </section>
+
+  <!-- 6 · QUÉ ES -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 10</span><span class="mark">2:7</span></div>
+    <div class="body"><div class="eyebrow anim">Qué constituye la comunión bíblica</div><h1 class="title anim">Cristo nos une para compartir</h1>
+      <div class="grid anim"><div class="colcard"><h3>Una cabeza</h3><p>Cristo es la cabeza de la iglesia. De él recibimos dirección, vida y unidad.</p><span class="ref">Colosenses 1:18</span></div><div class="colcard"><h3>Una vida en común</h3><p><em>Koinonía</em> significa «compartir en común». Dios nos da algo que ofrecer y algo que recibir.</p></div></div>
+      <div class="note anim">Ningún miembro tiene la misma función, pero cada uno es necesario para la salud de todo el cuerpo.</div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Qué es la comunión</span></div>
+  </section>
+
+  <!-- 7 · QUÉ COMPARTIR -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 10</span><span class="mark">2:7</span></div>
+    <div class="body top"><div class="eyebrow anim">Dar y recibir</div><h1 class="title anim">Dios nos dio mucho para compartir</h1>
+      <div class="vtable anim"><div class="vrow"><span class="gt">Amor práctico</span><span class="ref">1 Juan 4:11, 21</span></div><div class="vrow"><span class="gt">Las cargas de otros</span><span class="ref">Gálatas 6:2</span></div><div class="vrow"><span class="gt">Recursos con generosidad</span><span class="ref">2 Corintios 8:13-15</span></div><div class="vrow"><span class="gt">El evangelio y nuestra propia vida</span><span class="ref">1 Tesalonicenses 2:8</span></div><div class="vrow"><span class="gt">Confesión y oración</span><span class="ref">Santiago 5:16</span></div></div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Qué compartir</span></div>
+  </section>
+
+  <!-- 8 · DAR Y RECIBIR -->
+  <section class="slide scripture">
+    <div class="bigmark">2:7</div><div class="quote anim">La comunión significativa siempre incluye <span class="em">dar y recibir</span>.</div><div class="attr anim">Koinonía · Compartir en común</div>
+    <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Dar y recibir</span></div>
+  </section>
+
+  <!-- 9 · RECONCILIACIÓN -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 10</span><span class="mark">2:7</span></div>
+    <div class="body"><div class="eyebrow anim">Cuando la comunión se rompe</div><h1 class="title anim" style="font-size:46px">La reconciliación protege la comunión</h1>
+      <div class="list anim"><div class="item"><div class="num">1</div><div><div class="it-h">Toma la iniciativa</div><div class="it-s">Si recuerdas que alguien tiene algo contra ti, busca la reconciliación con prioridad.</div></div></div><div class="item"><div class="num">2</div><div><div class="it-h">Habla directamente</div><div class="it-s">Si un hermano peca contra ti, conversa primero con él en privado.</div></div></div><div class="item"><div class="num">3</div><div><div class="it-h">Perdona como fuiste perdonado</div><div class="it-s">La gracia que recibimos de Dios transforma nuestra respuesta al conflicto.</div></div></div></div>
+      <div class="note anim">Mateo 5:23-24 · Mateo 18:15, 35</div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Reconciliación</span></div>
+  </section>
+
+  <!-- 10 · BENEFICIOS -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 10</span><span class="mark">2:7</span></div>
+    <div class="body"><div class="eyebrow anim">Beneficios de la comunión</div><h1 class="title anim">Nos necesitamos para crecer</h1>
+      <div class="grid anim"><div class="colcard"><h3>Nos afilamos</h3><p>Una relación sincera ayuda a formar carácter, sabiduría y madurez.</p><span class="ref">Proverbios 27:17</span></div><div class="colcard"><h3>Nos levantamos</h3><p>Cuando uno cae, el otro está presente para ayudarlo a ponerse de pie.</p><span class="ref">Eclesiastés 4:9-10</span></div><div class="colcard" style="grid-column:1 / -1"><h3>Nos animamos</h3><p>La exhortación diaria protege el corazón del engaño del pecado y nos ayuda a perseverar.</p><span class="ref">Hebreos 3:13</span></div></div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Beneficios</span></div>
+  </section>
+
+  <!-- 11 · UN CUERPO -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 10</span><span class="mark">2:7</span></div>
+    <div class="body top"><div class="eyebrow anim">La comunión en el cuerpo de Cristo</div><h1 class="title anim">Diferentes, pero todos necesarios</h1>
+      <div class="grid anim"><ul class="bullets"><li>Dios asigna a cada miembro su función</li><li>La diversidad no disminuye la pertenencia</li><li>Nadie puede decir: «No te necesito»</li></ul><ul class="bullets"><li>Los miembros más débiles reciben cuidado</li><li>Dios desea armonía, no división</li><li>Cada parte se interesa por las demás</li></ul></div>
+      <div class="callout anim"><span class="tag">Leamos</span><div><b>1 Corintios 12:14-27</b> presenta unidad sin borrar la diversidad.</div></div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>El cuerpo de Cristo</span></div>
+  </section>
+
+  <!-- 12 · SUFRIR Y CELEBRAR -->
+  <section class="slide scripture">
+    <div class="bigmark">2:7</div><div class="quote anim">Si una parte sufre, <span class="em">todas sufren</span>; si una parte recibe honra, todas se alegran.</div><div class="attr anim">1 Corintios 12:26</div>
+    <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Unidad</span></div>
+  </section>
+
+  <!-- 13 · IGLESIA LOCAL -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 10</span><span class="mark">2:7</span></div>
+    <div class="body"><div class="eyebrow anim">La iglesia manifestada localmente</div><h1 class="title anim">Una comunidad que aprende y adora</h1>
+      <div class="grid anim"><div class="colcard"><h3>La enseñanza</h3><p>Los primeros creyentes se dedicaban a aprender la enseñanza de los apóstoles.</p></div><div class="colcard"><h3>La vida compartida</h3><p>Perseveraban en la comunión, la Cena del Señor y la oración.</p></div></div>
+      <div class="callout anim" style="background:var(--gold)"><span class="tag">Hechos 2:41-42</span><div>Tres marcas de la iglesia primitiva: <b>generosidad, oración y poder</b>.</div></div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>La iglesia local</span></div>
+  </section>
+
+  <!-- 14 · EQUIPAR Y CUIDAR -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 10</span><span class="mark">2:7</span></div>
+    <div class="body top"><div class="eyebrow anim">Responsabilidades mutuas</div><h1 class="title anim" style="font-size:46px">Una iglesia local que instruye y equipa</h1>
+      <div class="grid anim"><ul class="bullets"><li>Equipar al pueblo para servir <span>— Efesios 4:11-13</span></li><li>Someterse unos a otros <span>— Efesios 5:21</span></li><li>Enseñar y aconsejar <span>— Colosenses 3:16</span></li></ul><ul class="bullets"><li>Animarse y edificarse <span>— 1 Tesalonicenses 5:11</span></li><li>Reunirse y motivarse <span>— Hebreos 10:24-25</span></li><li>Confesar y orar <span>— Santiago 5:16</span></li></ul></div>
+      <div class="note anim">El resultado esperado es una comunidad madura, unida y efectiva en el ministerio.</div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Responsabilidades mutuas</span></div>
+  </section>
+
+  <!-- 15 · RESUMEN -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 10</span><span class="mark">2:7</span></div>
+    <div class="body"><div class="eyebrow anim">Resumen</div><h1 class="title anim">La comunión nos hace crecer</h1>
+      <div class="grid anim"><div class="colcard"><h3>Compartimos</h3><p>Ofrecemos lo que Dios nos dio y recibimos con humildad lo que otros aportan.</p></div><div class="colcard"><h3>Nos reconciliamos</h3><p>Buscamos restaurar pronto las relaciones quebrantadas.</p></div><div class="colcard"><h3>Nos necesitamos</h3><p>La unidad y la diversidad pueden vivir juntas en el cuerpo de Cristo.</p></div><div class="colcard"><h3>Servimos localmente</h3><p>Una iglesia concreta nos instruye, equipa y acompaña hacia la madurez.</p></div></div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Resumen</span></div>
+  </section>
+
+  <!-- 16 · TAREA -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 10</span><span class="mark">2:7</span></div>
+    <div class="body"><div class="eyebrow anim">Para la próxima semana</div><h1 class="title anim">Tarea para la sesión 11</h1>
+      <div class="list anim"><div class="item"><div class="num">1</div><div><div class="it-h">Memorización de las Escrituras</div><div class="it-s">Estudie «Por qué memorizar las Escrituras» (páginas 101-102) y anote razones personales para memorizar.</div></div></div><div class="item"><div class="num">2</div><div><div class="it-h">Tiempo a solas</div><div class="it-s">Continúe leyendo, marcando su Biblia y anotando puntos sobresalientes de su lectura.</div></div></div><div class="item"><div class="num">3</div><div><div class="it-h">Estudio bíblico</div><div class="it-s">Complete «Testificar» (páginas 102-106).</div></div></div></div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Tarea</span></div>
+  </section>
+
+  <!-- 17 · CIERRE -->
+  <section class="slide closing">
+    <div class="glyph anim">2:7</div><h1 class="anim">Terminemos en comunión con Dios</h1><p class="anim">Oremos unos por otros y respondamos juntos a lo que el Señor nos mostró hoy.</p><div class="rule anim"></div>
+    <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Sesión 10</span></div>
+  </section>
+</div></div>
+<div class="controls"><button id="prev" aria-label="Anterior">←</button><div class="count"><span id="current">1</span> / <span id="total">17</span></div><button id="next" aria-label="Siguiente">→</button></div>
+<div class="hint">← → · F pantalla completa</div>
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  const stage=document.getElementById('stage');
+  const currentEl=document.getElementById('current');
+  const totalEl=document.getElementById('total');
+  const progress=document.getElementById('progress');
+  let current=0;
+  totalEl.textContent=slides.length;
+  function show(n){current=(n+slides.length)%slides.length;slides.forEach((s,i)=>s.classList.toggle('is-active',i===current));currentEl.textContent=current+1;progress.style.width=((current+1)/slides.length*100)+'%';}
+  function scale(){const s=Math.min(window.innerWidth/1280,window.innerHeight/720);stage.style.transform=`scale(${s})`;}
+  document.getElementById('prev').addEventListener('click',()=>show(current-1));
+  document.getElementById('next').addEventListener('click',()=>show(current+1));
+  document.addEventListener('keydown',e=>{if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){e.preventDefault();show(current+1)}else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}else if(e.key==='Home'){show(0)}else if(e.key==='End'){show(slides.length-1)}else if(e.key.toLowerCase()==='f'){document.documentElement.requestFullscreen?.()}});
+  window.addEventListener('resize',scale);scale();show(0);
+</script>
+</body>
+</html>
