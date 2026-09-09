@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Serie 2:7 · Sesión 11 — Testificar</title>
+<link rel="icon" type="image/webp" href="../logo-2-7.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Libre+Franklin:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F2E9;--paper-2:#FBF8F1;--ink:#22282A;--ink-soft:#5A625F;--ink-faint:#8C938E;
+    --teal:#1E5B57;--teal-bright:#2E837B;--teal-wash:#E7EEEB;
+    --line:rgba(30,91,87,.20);--line-soft:rgba(34,40,42,.12);--gold:#B0894E;
+    --serif:'Spectral',Georgia,'Times New Roman',serif;--sans:'Libre Franklin',system-ui,-apple-system,sans-serif;
+    --W:1280px;--H:720px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{background:#1a1f1d;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow:hidden}
+  .viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+  .stage{width:var(--W);height:var(--H);position:relative;transform-origin:center center;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+  .slide{position:absolute;inset:0;width:var(--W);height:var(--H);background:var(--paper);background-image:radial-gradient(120% 90% at 88% 8%,rgba(46,131,123,.06),transparent 60%),radial-gradient(100% 80% at 6% 100%,rgba(176,137,78,.05),transparent 55%);padding:74px 92px 64px;display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .5s ease;overflow:hidden}
+  .slide.is-active{opacity:1;visibility:visible;z-index:2}
+  .slide::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E")}
+  .mark{font-family:var(--serif);font-weight:600;letter-spacing:.01em;color:var(--teal)}
+  .topbar{position:absolute;top:40px;left:92px;right:92px;display:flex;align-items:center;justify-content:space-between;z-index:3}
+  .topbar .series{font-size:12px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-faint)}
+  .topbar .mark{font-size:22px}
+  .footer{position:absolute;bottom:34px;left:92px;right:92px;display:flex;align-items:center;justify-content:space-between;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);z-index:3}
+  .eyebrow{font-size:14px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--teal-bright);display:flex;align-items:center;gap:14px;margin-bottom:16px}
+  .eyebrow::before{content:"";width:34px;height:2px;background:var(--teal);display:inline-block}
+  h1.title{font-family:var(--serif);font-weight:500;font-size:52px;line-height:1.06;letter-spacing:-.01em;color:var(--ink);max-width:none;white-space:nowrap}
+  .lead{font-size:23px;line-height:1.5;color:var(--ink-soft);margin-top:18px;max-width:56ch;font-weight:400}
+  .body{flex:1;display:flex;flex-direction:column;justify-content:center}
+  .body.top{justify-content:flex-start;padding-top:6px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px 52px;margin-top:28px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:28px}
+  .bullets{list-style:none;display:flex;flex-direction:column;gap:15px}
+  .bullets li{position:relative;padding-left:28px;font-size:22px;line-height:1.4;color:var(--ink)}
+  .bullets li span{color:var(--ink-soft);font-size:18px}
+  .bullets li::before{content:"";position:absolute;left:0;top:10px;width:11px;height:11px;background:var(--teal);transform:rotate(45deg)}
+  .colcard{background:var(--paper-2);border:1px solid var(--line-soft);border-radius:14px;padding:25px 30px}
+  .colcard h3{font-family:var(--serif);font-weight:600;font-size:25px;color:var(--teal);margin-bottom:12px}
+  .colcard p{font-size:20px;line-height:1.48;color:var(--ink-soft)}
+  .colcard .ref{display:block;margin-top:11px;font-family:var(--serif);font-weight:600;font-size:18px;color:var(--teal)}
+  .cover{justify-content:center;align-items:flex-start;padding:0 96px}
+  .cover .kicker{font-size:14px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--teal-bright)}
+  .cover .glyph{font-family:var(--serif);font-weight:600;font-size:150px;line-height:.9;color:var(--teal);letter-spacing:-.02em;margin:8px 0 6px -6px;position:relative}
+  .cover .glyph::after{content:"";display:block;width:120px;height:4px;background:var(--gold);margin-top:26px}
+  .cover h1{font-family:var(--serif);font-weight:500;font-size:60px;line-height:1.04;color:var(--ink);max-width:none;margin-top:30px;letter-spacing:-.015em;white-space:nowrap}
+  .cover .sess{display:flex;align-items:baseline;gap:16px;margin-top:30px}
+  .cover .sess b{font-family:var(--serif);font-weight:600;font-size:30px;color:var(--ink)}
+  .cover .sess span{font-size:15px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint)}
+  .cover .ref{position:absolute;bottom:64px;left:96px;font-style:italic;font-family:var(--serif);font-size:18px;color:var(--ink-soft);max-width:57ch}
+  .cover .deco{position:absolute;top:0;right:0;width:300px;height:100%;background:linear-gradient(180deg,rgba(46,131,123,.10),rgba(30,91,87,.04));border-left:1px solid var(--line)}
+  .cover .deco::before{content:"2:7";position:absolute;bottom:48px;right:40px;font-family:var(--serif);font-size:90px;color:rgba(30,91,87,.10);font-weight:600}
+  .scripture{align-items:center;justify-content:center;text-align:center;padding:70px 130px}
+  .scripture .quote{font-family:var(--serif);font-weight:400;font-style:italic;font-size:42px;line-height:1.38;color:var(--ink);letter-spacing:-.005em;max-width:26ch}
+  .scripture .quote .em{color:var(--teal);font-style:italic;font-weight:500}
+  .scripture .attr{margin-top:34px;font-size:16px;letter-spacing:.28em;text-transform:uppercase;color:var(--teal-bright);font-weight:600}
+  .scripture .bigmark{position:absolute;top:60px;left:50%;transform:translateX(-50%);font-family:var(--serif);font-size:46px;color:var(--line);font-weight:600}
+  .list{display:flex;flex-direction:column;gap:18px;margin-top:28px}
+  .item{display:flex;gap:22px;align-items:flex-start}
+  .num{flex:none;width:42px;height:42px;border-radius:50%;border:1.5px solid var(--teal);color:var(--teal);font-family:var(--serif);font-weight:600;font-size:20px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .item .it-h{font-size:24px;font-weight:600;color:var(--ink);line-height:1.25}
+  .item .it-s{font-size:20px;color:var(--ink-soft);line-height:1.45;margin-top:4px;max-width:72ch}
+  .callout{margin-top:24px;background:var(--teal);color:#F4F1E8;border-radius:12px;padding:18px 26px;font-size:20px;line-height:1.4;display:flex;align-items:center;gap:16px}
+  .callout b{color:#fff}.callout .tag{flex:none;font-size:12px;letter-spacing:.2em;text-transform:uppercase;background:rgba(255,255,255,.16);padding:6px 12px;border-radius:20px;font-weight:600}
+  .note{margin-top:22px;font-size:19px;color:var(--ink-soft);font-style:italic;font-family:var(--serif);padding-left:18px;border-left:2px solid var(--teal);max-width:80ch}
+  .vtable{margin-top:24px;border-top:1px solid var(--line)}
+  .vrow{display:flex;align-items:center;justify-content:space-between;padding:14px 6px;border-bottom:1px solid var(--line-soft)}
+  .vrow .gt{font-size:23px;color:var(--ink);font-weight:500}
+  .vrow .ref{font-family:var(--serif);font-size:21px;font-weight:600;color:var(--teal);letter-spacing:.01em;white-space:nowrap}
+  .closing{align-items:center;justify-content:center;text-align:center}
+  .closing .glyph{font-family:var(--serif);font-size:70px;color:var(--teal);font-weight:600;line-height:1}
+  .closing h1{font-family:var(--serif);font-weight:500;font-size:46px;color:var(--ink);margin-top:18px;max-width:none;white-space:nowrap}
+  .closing p{margin-top:18px;font-size:20px;color:var(--ink-soft);font-style:italic;font-family:var(--serif);max-width:46ch}
+  .closing .rule{width:90px;height:3px;background:var(--gold);margin:30px auto 0}
+  .slide.is-active .anim{animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
+  .slide.is-active .anim:nth-child(1){animation-delay:.05s}.slide.is-active .anim:nth-child(2){animation-delay:.13s}.slide.is-active .anim:nth-child(3){animation-delay:.21s}.slide.is-active .anim:nth-child(4){animation-delay:.29s}.slide.is-active .anim:nth-child(5){animation-delay:.37s}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .controls{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:50;background:rgba(20,26,24,.72);backdrop-filter:blur(8px);padding:8px 10px;border-radius:40px;border:1px solid rgba(255,255,255,.08);opacity:.25;transition:opacity .3s}
+  .controls:hover{opacity:1}.controls button{width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;background:rgba(255,255,255,.10);color:#F4F1E8;font-size:17px;display:flex;align-items:center;justify-content:center;transition:background .2s}.controls button:hover{background:var(--teal-bright)}
+  .controls .count{color:#E7E2D6;font-size:13px;letter-spacing:.12em;min-width:54px;text-align:center;font-variant-numeric:tabular-nums}
+  .progress{position:fixed;top:0;left:0;height:3px;background:var(--teal-bright);z-index:60;transition:width .4s ease}
+  .hint{position:fixed;bottom:26px;right:24px;color:rgba(255,255,255,.32);font-size:11px;letter-spacing:.1em;z-index:50}
+  @media print{@page{size:13.333in 7.5in;margin:0}html,body{height:auto;overflow:visible;background:#fff}.viewport{position:static;display:block}.stage{width:auto;height:auto;transform:none!important;box-shadow:none}.slide{position:relative;inset:auto;opacity:1!important;visibility:visible!important;page-break-after:always;break-after:page;box-shadow:none}.slide:last-child{page-break-after:auto}.slide .anim{animation:none!important}.controls,.hint,.progress{display:none!important}.slide::after{opacity:.45}}
+</style>
+</head>
+<body>
+<!-- Fuente de contenido: PDF suministrado por el usuario, páginas 101-107. -->
+<div class="progress" id="progress"></div>
+<div class="viewport"><div class="stage" id="stage">
+  <!-- 1 · PORTADA -->
+  <section class="slide cover is-active">
+    <div class="deco"></div><div class="kicker anim">La Serie 2:7</div><div class="glyph anim">2:7</div>
+    <h1 class="anim">Testificar</h1><div class="sess anim"><b>Sesión 11</b><span>Discipulado</span></div>
+    <div class="ref">«Les anunciamos lo que nosotros mismos hemos visto y oído.» — 1 Juan 1:3</div>
+  </section>
+
+  <!-- 2 · BOSQUEJO -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 11</span><span class="mark">2:7</span></div>
+    <div class="body top"><div class="eyebrow anim">Bosquejo de esta sesión</div><h1 class="title anim">Lo que veremos hoy</h1>
+      <div class="grid anim"><ul class="bullets"><li>Iniciar con oración</li><li>Repasar versículos y tareas completadas</li><li>Compartir puntos de la lectura</li><li>Por qué memorizar las Escrituras</li></ul><ul class="bullets"><li>Estudiar «Testificar»</li><li>Leer «Siga creciendo»</li><li>Celebrar el cierre del libro 1</li><li>Oración conversacional</li></ul></div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Bosquejo</span></div>
+  </section>
+
+  <!-- 3 · REPASO -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 11</span><span class="mark">2:7</span></div>
+    <div class="body"><div class="eyebrow anim">Antes de comenzar</div><h1 class="title anim">Celebremos lo que Dios ha hecho</h1>
+      <div class="list anim"><div class="item"><div class="num">1</div><div><div class="it-h">Reciten la Palabra</div><div class="it-s">Repasen en grupos pequeños los cinco o seis versículos aprendidos.</div></div></div><div class="item"><div class="num">2</div><div><div class="it-h">Compartan su lectura</div><div class="it-s">Mencionen por lo menos un punto sobresaliente y su aplicación.</div></div></div><div class="item"><div class="num">3</div><div><div class="it-h">Completen el registro</div><div class="it-s">Revisen firmas pendientes y celebren la graduación del libro 1.</div></div></div></div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Repaso</span></div>
+  </section>
+
+  <!-- 4 · MEMORIZAR -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 11</span><span class="mark">2:7</span></div>
+    <div class="body top"><div class="eyebrow anim">Por qué memorizar las Escrituras</div><h1 class="title anim">Una convicción que se vuelve hábito</h1>
+      <div class="grid anim"><div class="colcard"><h3>Mi beneficio principal</h3><p>¿Qué fruto personal espero recibir al guardar la Palabra en mi mente y corazón?</p></div><div class="colcard"><h3>Mis motivaciones</h3><p>¿Qué razones me sostendrán cuando memorizar requiera constancia y esfuerzo?</p></div><div class="colcard"><h3>Mis obstáculos</h3><p>¿Qué actitudes, hábitos o influencias podrían impedir un progreso significativo?</p></div><div class="colcard"><h3>Mi siguiente paso</h3><p>Defina un ritmo sencillo de aprendizaje y repaso que pueda mantener.</p></div></div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Memorización</span></div>
+  </section>
+
+  <!-- 5 · EL ESPÍRITU SANTO -->
+  <section class="slide scripture">
+    <div class="bigmark">2:7</div><div class="quote anim">Nosotros comunicamos a Cristo; <span class="em">el Espíritu Santo</span> es quien transforma a la persona.</div><div class="attr anim">El testigo depende de Dios</div>
+    <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Testificar</span></div>
+  </section>
+
+  <!-- 6 · EL LLAMADO -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 11</span><span class="mark">2:7</span></div>
+    <div class="body"><div class="eyebrow anim">El desafío</div><h1 class="title anim">Seguir a Jesús nos vuelve testigos</h1>
+      <div class="grid anim"><div class="colcard"><h3>Síganme</h3><p>Jesús llama primero a una relación de seguimiento; él mismo forma a quienes alcanzarán a otros.</p><span class="ref">Mateo 4:19</span></div><div class="colcard"><h3>Cuenta lo que hizo</h3><p>El hombre restaurado volvió a los suyos para contar cuánto había hecho el Señor y cómo tuvo misericordia.</p><span class="ref">Marcos 5:19</span></div></div>
+      <div class="note anim">La experiencia personal de la gracia de Cristo se convierte en un mensaje cercano y creíble.</div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>El llamado</span></div>
+  </section>
+
+  <!-- 7 · MOTIVACIONES -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 11</span><span class="mark">2:7</span></div>
+    <div class="body top"><div class="eyebrow anim">2 Corintios 5:9-14</div><h1 class="title anim">El amor de Cristo nos impulsa</h1>
+      <div class="grid anim"><ul class="bullets"><li>Nuestra meta es agradar al Señor <span>— v. 9</span></li><li>Rendiremos cuentas delante de Cristo <span>— v. 10</span></li></ul><ul class="bullets"><li>El temor del Señor nos mueve a persuadir <span>— v. 11</span></li><li>El amor de Cristo nos controla e impulsa <span>— v. 14</span></li></ul></div>
+      <div class="callout anim"><span class="tag">Motivación</span><div>No testificamos para ganar valor; lo hacemos porque <b>Cristo nos amó y murió por nosotros</b>.</div></div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Motivaciones</span></div>
+  </section>
+
+  <!-- 8 · EMBAJADORES -->
+  <section class="slide scripture">
+    <div class="bigmark">2:7</div><div class="quote anim">Dios hace su llamado por medio de nosotros: somos <span class="em">embajadores de Cristo</span>.</div><div class="attr anim">2 Corintios 5:20</div>
+    <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Embajadores</span></div>
+  </section>
+
+  <!-- 9 · EL MENSAJE -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 11</span><span class="mark">2:7</span></div>
+    <div class="body top"><div class="eyebrow anim">Cómo presentar el mensaje</div><h1 class="title anim">El evangelio anuncia a Cristo</h1>
+      <div class="grid anim"><div class="colcard"><h3>Murió por nuestros pecados</h3><p>La muerte de Cristo responde a nuestra necesidad más profunda y cumple las Escrituras.</p></div><div class="colcard"><h3>Fue sepultado</h3><p>Su muerte fue real; el evangelio está arraigado en hechos, no en una idea.</p></div><div class="colcard"><h3>Resucitó al tercer día</h3><p>La resurrección confirma la victoria de Cristo y sostiene nuestra esperanza.</p></div><div class="colcard"><h3>Es el corazón del mensaje</h3><p>Sin resurrección, la predicación y la fe serían inútiles.</p></div></div>
+      <div class="note anim">1 Corintios 15:1-4, 12-19</div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>El evangelio</span></div>
+  </section>
+
+  <!-- 10 · ACTITUD -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 11</span><span class="mark">2:7</span></div>
+    <div class="body"><div class="eyebrow anim">La actitud del testigo</div><h1 class="title anim">Dispuestos y sin vergüenza</h1>
+      <div class="grid anim"><div class="colcard"><h3>Completar la misión</h3><p>Pablo consideraba su vida valiosa si terminaba la tarea de anunciar las Buenas Noticias de la gracia de Dios.</p><span class="ref">Hechos 20:24</span></div><div class="colcard"><h3>Anunciar con confianza</h3><p>Estaba ansioso por predicar y no se avergonzaba del evangelio, porque es poder de Dios para salvación.</p><span class="ref">Romanos 1:15-16</span></div></div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>La actitud</span></div>
+  </section>
+
+  <!-- 11 · EL MENSAJERO -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 11</span><span class="mark">2:7</span></div>
+    <div class="body"><div class="eyebrow anim">El mensajero</div><h1 class="title anim">Somos testigos con vida y palabras</h1>
+      <div class="list anim"><div class="item"><div class="num">1</div><div><div class="it-h">Una vida visible</div><div class="it-s">La gente observa la manera en que vivimos; nuestras obras pueden despertar preguntas sinceras.</div></div></div><div class="item"><div class="num">2</div><div><div class="it-h">Un mensaje audible</div><div class="it-s">Las obras no explican por sí solas el evangelio. También debemos hablar claramente de Cristo.</div></div></div><div class="item"><div class="num">3</div><div><div class="it-h">Una persona enviada</div><div class="it-s">Para creer necesitan oír; para oír, alguien debe anunciar; y quien anuncia va enviado por Dios.</div></div></div></div>
+      <div class="note anim">Romanos 10:13-15</div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>El mensajero</span></div>
+  </section>
+
+  <!-- 12 · MANSEDUMBRE -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 11</span><span class="mark">2:7</span></div>
+    <div class="body"><div class="eyebrow anim">1 Pedro 3:15-16</div><h1 class="title anim">Listos para responder con respeto</h1>
+      <div class="list anim"><div class="item"><div class="num">1</div><div><div class="it-h">Consagren a Cristo como Señor</div><div class="it-s">El testimonio comienza con una vida rendida interiormente a él.</div></div></div><div class="item"><div class="num">2</div><div><div class="it-h">Estén preparados</div><div class="it-s">Podemos explicar con sencillez la esperanza que tenemos cuando alguien pregunta.</div></div></div><div class="item"><div class="num">3</div><div><div class="it-h">Háganlo con gentileza</div><div class="it-s">La verdad se comunica con respeto, conciencia limpia y conducta coherente.</div></div></div></div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Gentileza y respeto</span></div>
+  </section>
+
+  <!-- 13 · PASOS -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 11</span><span class="mark">2:7</span></div>
+    <div class="body top"><div class="eyebrow anim">Un testigo más efectivo</div><h1 class="title anim">El siguiente paso puede ser sencillo</h1>
+      <div class="grid anim"><ul class="bullets"><li>Ore por personas concretas</li><li>Escuche con interés genuino</li><li>Aprenda a contar su historia con claridad</li></ul><ul class="bullets"><li>Conozca el mensaje central del evangelio</li><li>Viva de manera coherente</li><li>Dependa del Espíritu Santo</li></ul></div>
+      <div class="callout anim"><span class="tag">Aplicación</span><div>¿Qué acción específica dará esta semana para acercarse a ser un testigo más efectivo?</div></div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Siguiente paso</span></div>
+  </section>
+
+  <!-- 14 · RESUMEN -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 11</span><span class="mark">2:7</span></div>
+    <div class="body"><div class="eyebrow anim">Resumen</div><h1 class="title anim">Testificar es una forma de vida</h1>
+      <div class="grid anim"><div class="colcard"><h3>Contamos lo vivido</h3><p>Compartimos cómo Cristo nos salvó y cómo continúa obrando en nuestra vida.</p></div><div class="colcard"><h3>Anunciamos el evangelio</h3><p>Explicamos con claridad su muerte por nuestros pecados y su resurrección.</p></div><div class="colcard"><h3>Vivimos el mensaje</h3><p>Nuestra conducta acompaña las palabras y muestra la gracia de Jesús.</p></div><div class="colcard"><h3>Dependemos del Espíritu</h3><p>Somos mensajeros fieles; Dios es quien convence y transforma.</p></div></div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Resumen</span></div>
+  </section>
+
+  <!-- 15 · LOGROS -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 11</span><span class="mark">2:7</span></div>
+    <div class="body top"><div class="eyebrow anim">Siga creciendo</div><h1 class="title anim">Lo que ha alcanzado</h1>
+      <div class="grid anim"><ul class="bullets"><li>Disfrutar y marcar la lectura bíblica</li><li>Vivir un tiempo a solas constante</li><li>Anotar lo que Dios le muestra</li></ul><ul class="bullets"><li>Memorizar pasajes clave</li><li>Buscar una vida cristiana equilibrada</li><li>Orar y cultivar amistades para evangelizar</li></ul></div>
+      <div class="callout anim" style="background:var(--gold)"><span class="tag">¡Felicidades!</span><div>Ha dado pasos significativos para establecer firmemente su <b>caminar con Cristo</b>.</div></div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Lo alcanzado</span></div>
+  </section>
+
+  <!-- 16 · LIBRO 2 -->
+  <section class="slide">
+    <div class="topbar"><span class="series">La Serie 2:7 · Sesión 11</span><span class="mark">2:7</span></div>
+    <div class="body top"><div class="eyebrow anim">Una vista previa del libro 2</div><h1 class="title anim" style="font-size:46px">Cultivando raíces en la familia de Dios</h1>
+      <div class="grid anim"><div><div class="vtable" style="margin-top:0"><div class="vrow"><span class="gt">Libro 1 · Creciendo firmes</span></div><div class="vrow"><span class="gt">Libro 2 · Cultivando raíces</span></div><div class="vrow"><span class="gt">Libro 3 · Dando fruto</span></div></div></div><ul class="bullets"><li>Memorizar la ilustración de la rueda</li><li>Preparar y presentar «Mi relato»</li><li>Pasar tiempo prolongado a solas con Dios</li><li>Profundizar en el señorío de Cristo</li></ul></div>
+      <div class="note anim">Lo aprendido en este libro se convierte en la base para el siguiente tramo del camino.</div>
+    </div><div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Libro 2</span></div>
+  </section>
+
+  <!-- 17 · CIERRE -->
+  <section class="slide closing">
+    <div class="glyph anim">2:7</div><h1 class="anim">¡Siga creciendo!</h1><p class="anim">«Arráiguense profundamente en él y edifiquen toda la vida sobre él.» — Colosenses 2:7</p><div class="rule anim"></div>
+    <div class="footer"><span>Creciendo firmes en la familia de Dios</span><span>Sesión 11</span></div>
+  </section>
+</div></div>
+<div class="controls"><button id="prev" aria-label="Anterior">←</button><div class="count"><span id="current">1</span> / <span id="total">17</span></div><button id="next" aria-label="Siguiente">→</button></div>
+<div class="hint">← → · F pantalla completa</div>
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  const stage=document.getElementById('stage');
+  const currentEl=document.getElementById('current');
+  const totalEl=document.getElementById('total');
+  const progress=document.getElementById('progress');
+  let current=0;
+  totalEl.textContent=slides.length;
+  function show(n){current=(n+slides.length)%slides.length;slides.forEach((s,i)=>s.classList.toggle('is-active',i===current));currentEl.textContent=current+1;progress.style.width=((current+1)/slides.length*100)+'%';}
+  function scale(){const s=Math.min(window.innerWidth/1280,window.innerHeight/720);stage.style.transform=`scale(${s})`;}
+  document.getElementById('prev').addEventListener('click',()=>show(current-1));
+  document.getElementById('next').addEventListener('click',()=>show(current+1));
+  document.addEventListener('keydown',e=>{if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){e.preventDefault();show(current+1)}else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}else if(e.key==='Home'){show(0)}else if(e.key==='End'){show(slides.length-1)}else if(e.key.toLowerCase()==='f'){document.documentElement.requestFullscreen?.()}});
+  window.addEventListener('resize',scale);scale();show(0);
+</script>
+</body>
+</html>
